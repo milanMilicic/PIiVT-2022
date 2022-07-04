@@ -102,10 +102,10 @@ CREATE TABLE IF NOT EXISTS `salary` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `email` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `username` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `password_hash` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`user_id`),
-  UNIQUE KEY `uq_user_email` (`email`)
+  UNIQUE KEY `uq_user_email` (`username`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
