@@ -9,7 +9,7 @@
     "start": "npm run build && node --trace-warnings ./dist/main.js",
     "start:dev": "ts-node-dev --respawn -- ./src/main.ts"
   },
-  "author": "Milan Michael Miličić <milan.michael.milicic.18@singimail.rs>>",
+  "author": "Milan Michael Miličić <milan.michael.milicic.18@singimail.rs>",
   "license": "ISC",
   "devDependencies": {
     "@types/cors": "^2.8.12",
