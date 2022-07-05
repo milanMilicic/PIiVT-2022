@@ -21,8 +21,13 @@ const DevConfig: IConfig = {
         database: "piivt_project",
         charset: "utf8",
         timezone: "+01:00",
-        supportBigNumbers: true,
-    }
+        supportBigNumbers: false,
+    },
+    logging: {
+        path: "./logs",
+        filename: "access.log",
+        format: ":date[iso]\t:remote-addr\t:method\t:url\t:status\t:res[content-length] bytes\t:response-time ms",
+    },
 }
 
 export default DevConfig;

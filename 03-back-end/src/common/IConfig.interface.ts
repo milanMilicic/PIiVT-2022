@@ -19,7 +19,12 @@ export default interface IConfig {
         database: string,
         charset: 'utf8' | 'utf8mb4' | 'ascii',
         timezone: string,
-        supportBigNumbers: true,
+        supportBigNumbers: false,
+    },
+    logging: {
+        path: string,
+        filename: string,
+        format: string,
     },
 
 }

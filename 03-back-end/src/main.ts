@@ -2,23 +2,38 @@ import * as express from "express";
 import * as cors from "cors";
 import IConfig from "./common/IConfig.interface";
 import DevConfig from "./configs";
-import CategoryController from "./components/category/CategoryController.controller";
-import CategoryService from "./components/category/CategoryService.service";
 import * as fs from "fs";
 import * as morgan from "morgan";
+import CategoryRouter from "./components/category/CategoryRouter.router";
+import IApplicationResources from "./common/IApplicationResources.interface";
+import * as mysql2 from "mysql2/promise";
 
 
-const config: IConfig = DevConfig;
+async function main(){
+    const config: IConfig = DevConfig;
 
-fs.mkdirSync("./logs", {
+fs.mkdirSync(config.logging.path, {
     mode: 0o755,
     recursive: true,
 });
 
+const resources: IApplicationResources = {
+    databaseConnection: await mysql2.createConnection({
+        host: config.database.host,
+        port: config.database.port,
+        user: config.database.user,
+        password: config.database.password,
+        database: config.database.database,
+        charset: config.database.charset,
+        timezone: config.database.timezone,
+        supportBigNumbers: config.database.supportBigNumbers,
+    })
+}
+
 const application: express.Application = express();
 
-application.use(morgan(":date[iso]\t:remote-addr\t:method\t:url\t:status\t:res[content-length] bytes\t:response-time ms", {
-    stream: fs.createWriteStream("./logs/access.log")
+application.use(morgan(config.logging.format, {
+    stream: fs.createWriteStream(config.logging.path + "/" + config.logging.filename, {flags: 'a'}),
 }));
 
 application.use(cors());
@@ -33,15 +48,16 @@ application.use(config.server.static.route, express.static(config.server.static.
 }));
 
 
-const categoryService: CategoryService = new CategoryService();
-const categoryController: CategoryController = new CategoryController(categoryService);
+CategoryRouter.setupRoutes(application, resources);
 
-application.get('/api/categories', categoryController.getAll.bind(categoryController));
-application.get('/api/categories/:cid', categoryController.getById.bind(categoryController));
 
 application.use( (req, res) => {
     res.sendStatus(404);
 });
 
 application.listen(config.server.port);
+
+}
+
+main();
 
