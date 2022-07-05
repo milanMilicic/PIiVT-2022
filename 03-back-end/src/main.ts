@@ -4,9 +4,9 @@ import IConfig from "./common/IConfig.interface";
 import DevConfig from "./configs";
 import * as fs from "fs";
 import * as morgan from "morgan";
-import CategoryRouter from "./components/category/CategoryRouter.router";
 import IApplicationResources from "./common/IApplicationResources.interface";
 import * as mysql2 from "mysql2/promise";
+import routers from "./routers";
 
 
 async function main(){
@@ -48,7 +48,9 @@ application.use(config.server.static.route, express.static(config.server.static.
 }));
 
 
-CategoryRouter.setupRoutes(application, resources);
+for(let router of routers){
+    router.setupRoutes(application, resources)
+}
 
 
 application.use( (req, res) => {
@@ -58,6 +60,10 @@ application.use( (req, res) => {
 application.listen(config.server.port);
 
 }
+
+process.on('uncaughtException', error => {
+    console.log('ERROR:', error);
+});
 
 main();
 
