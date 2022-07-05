@@ -5,6 +5,7 @@ import IApplicationResources from "../../common/IApplicationResources.interface"
 import IRouter from "../../common/IRouter.interface";
 
 export default class CategoryRouter implements IRouter {
+    
     public setupRoutes(application: express.Application, resources: IApplicationResources){
         const categoryService: CategoryService = new CategoryService(resources.databaseConnection);
         const categoryController: CategoryController = new CategoryController(categoryService);
