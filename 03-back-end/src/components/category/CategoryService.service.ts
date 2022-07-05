@@ -1,5 +1,16 @@
 import CategoryModel from './CategoryModel.model';
 import * as mysql2 from "mysql2/promise";
+import IAdapterOptions from '../../common/IAdapterOptions.interface';
+import EmployeeService from '../employee/EmployeeService.service';
+import IAddCategory from './dto/IAddCategory.dto';
+
+interface ICategoryAdapterOptions extends IAdapterOptions {
+    loadEmployees: boolean;
+}
+
+const DefaultCategoryAdapterOptions: ICategoryAdapterOptions = {
+    loadEmployees: true,
+}
 
 export default class CategoryService {
     private db: mysql2.Connection;
@@ -8,19 +19,25 @@ export default class CategoryService {
         this.db = databaseConnection;
     }
 
-    private async adapToModel(data: any): Promise<CategoryModel>{
+    private async adapToModel(data: any, options: ICategoryAdapterOptions = DefaultCategoryAdapterOptions): Promise<CategoryModel>{
         const category: CategoryModel = new CategoryModel();
 
         category.categoryId = +data?.category_id;
         category.name = data?.name;
         category.hourlyPrice = +data?.hourly_price;
 
+        if(options.loadEmployees){
+            const employeeService: EmployeeService = new EmployeeService(this.db);
+
+            category.employees = await employeeService.getEmployeesByCategoryId(category.categoryId);
+        }
+
 
         return category;
     }
 
     public async getAll(): Promise<CategoryModel[]>{
-        return new Promise((resolve, reject) => {
+        return new Promise<CategoryModel[]>((resolve, reject) => {
             const sql = "SELECT * FROM category ORDER BY hourly_price DESC;";
             
             this.db.execute(sql)
@@ -33,7 +50,7 @@ export default class CategoryService {
                 const categories: CategoryModel[] = [];
 
                 for(let row of rows as mysql2.RowDataPacket[]){
-                    categories.push(await this.adapToModel(row));
+                    categories.push(await this.adapToModel(row, {loadEmployees: false},));
                 }
 
                 resolve(categories);
@@ -45,11 +62,11 @@ export default class CategoryService {
         });
     }
 
-    public async getById(catgoryId: number): Promise<CategoryModel|null>{
-        return new Promise((resolve, reject) => {
+    public async getById(categoryId: number): Promise<CategoryModel|null>{
+        return new Promise<CategoryModel>((resolve, reject) => {
             const sql = "SELECT * FROM category WHERE category_id = ?;";
 
-            this.db.execute(sql, [ catgoryId ])
+            this.db.execute(sql, [ categoryId ])
             .then(async ([rows]) => {
 
                 if(rows === undefined){
@@ -66,5 +83,19 @@ export default class CategoryService {
                 reject(error);
             });
         })
-    }   
+    }  
+    
+    public async add(data: IAddCategory): Promise<CategoryModel>{
+        return new Promise((resolve, reject) => {
+            const sql = "INSERT category SET name = ?, hourly_price = ?;";
+
+            this.db.execute(sql, [ data.name, data.hourlyPrice])
+            .then(result => {
+
+            })
+            .catch(error => {
+                reject(error);
+            })
+        })
+    }
 }
