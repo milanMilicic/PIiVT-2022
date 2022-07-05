@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import CategoryService from './CategoryService.service';
+import IAddCategory, { AddCategoryValidator } from "./dto/IAddCategory.dto";
 
 export default class CategoryController {
     private categoryService: CategoryService;
@@ -31,6 +32,22 @@ export default class CategoryController {
         })
         .catch(error => {
             res.status(500).send(error?.message);
+        });
+    }
+
+    async add(req: Request, res: Response){
+        const data = req.body as IAddCategory;
+
+        if(!AddCategoryValidator(data)){
+            return res.status(400).send(AddCategoryValidator.errors)
+        }
+
+        this.categoryService.add(data)
+        .then(result => {
+            res.send(result);
+        })
+        .catch(error => {
+            res.status(400).send(error?.message);
         });
     }
 }
