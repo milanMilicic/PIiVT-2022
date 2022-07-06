@@ -4,6 +4,7 @@ import { AddEmployeeValidator } from "../employee/dto/IAddEmployee.dto";
 import EmployeeService from "../employee/EmployeeService.service";
 import CategoryService, { DefaultCategoryAdapterOptions } from './CategoryService.service';
 import { AddCategoryValidator, IAddCategoryDto } from "./dto/IAddCategory.dto";
+import IEditCategory, { EditCategoryValidator, IEditCategoryDto } from "./dto/IEditCategory.dto";
 
 export default class CategoryController {
     private categoryService: CategoryService;
@@ -40,7 +41,7 @@ export default class CategoryController {
         });
     }
 
-    async add(req: Request, res: Response){
+    async addCategory(req: Request, res: Response){
         const data = req.body as IAddCategoryDto;
 
         if(!AddCategoryValidator(data)){
@@ -83,6 +84,43 @@ export default class CategoryController {
         .catch(error => {
             res.status(500).send(error?.message);
         });
+    }
+
+    async editCategory(req: Request, res: Response){
+        const categoryId: number = +req.params?.cid;
+        const data = req.body as IEditCategoryDto;
+
+        if(!EditCategoryValidator(data)){
+            return res.status(400).send(EditCategoryValidator.errors)
+        }
+
+        this.categoryService.getById(categoryId, {loadEmployees: false})
+        .then(result => {
+            if(result === null){
+                res.status(404).send('Category not found');
+            }
+
+            const serviceData: IEditCategory = {};
+            if(data.name !== undefined){
+                serviceData.name = data.name;
+            }
+
+            if(data.hourlyPrice !== undefined){
+                serviceData.hourly_price = data.hourlyPrice;
+            }
+
+            this.categoryService.editById(categoryId, serviceData)
+            .then(result => {
+                res.send(result);
+            })
+            .catch(error => {
+                res.status(400).send(error?.message);
+            })
+        })
+        .catch(error => {
+            res.status(500).send(error?.message);
+        });
+
 
     }
 }

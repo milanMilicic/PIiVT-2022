@@ -3,6 +3,7 @@ import IAdapterOptions from '../../common/IAdapterOptions.interface';
 import EmployeeService from '../employee/EmployeeService.service';
 import IAddCategory from './dto/IAddCategory.dto';
 import BaseService from '../../common/BaseService';
+import IEditCategory from './dto/IEditCategory.dto';
 
 interface ICategoryAdapterOptions extends IAdapterOptions {
     loadEmployees: boolean;
@@ -32,13 +33,16 @@ export default class CategoryService extends BaseService<CategoryModel, ICategor
             category.employees = await employeeService.getAllEmployeesByCategoryId(category.categoryId, {});
         }
 
-
         return category;
     }
 
     
     public async add(data: IAddCategory): Promise<CategoryModel>{
         return this.baseAdd(data, {loadEmployees: false});
+    }
+
+    public async editById(categoryId: number, data: IEditCategory): Promise<CategoryModel>{
+        return this.baseEditById(categoryId, data, { loadEmployees: false });
     }
 }
 
