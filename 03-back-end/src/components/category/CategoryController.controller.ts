@@ -3,7 +3,7 @@ import IAddEmployeeDto from "../employee/dto/IAddEmployee.dto";
 import { AddEmployeeValidator } from "../employee/dto/IAddEmployee.dto";
 import EmployeeService from "../employee/EmployeeService.service";
 import CategoryService, { DefaultCategoryAdapterOptions } from './CategoryService.service';
-import IAddCategory, { AddCategoryValidator } from "./dto/IAddCategory.dto";
+import { AddCategoryValidator, IAddCategoryDto } from "./dto/IAddCategory.dto";
 
 export default class CategoryController {
     private categoryService: CategoryService;
@@ -41,13 +41,13 @@ export default class CategoryController {
     }
 
     async add(req: Request, res: Response){
-        const data = req.body as IAddCategory;
+        const data = req.body as IAddCategoryDto;
 
         if(!AddCategoryValidator(data)){
             return res.status(400).send(AddCategoryValidator.errors)
         }
 
-        this.categoryService.add(data)
+        this.categoryService.add({name: data.name, hourly_price: data.hourlyPrice})
         .then(result => {
             res.send(result);
         })
@@ -71,7 +71,7 @@ export default class CategoryController {
                 res.sendStatus(404);
             }
 
-            this.employeeService.add({name: data.name, jmbg: data.jmbg, categoryId: categoryId, employment: data.employment})
+            this.employeeService.add({name: data.name, jmbg: data.jmbg, category_id: categoryId, employment: data.employment})
             .then(result => {
                 res.send(result);
             })

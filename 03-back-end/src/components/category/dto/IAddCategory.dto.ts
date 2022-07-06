@@ -4,9 +4,14 @@ import IServiceData from "../../../common/IServiceData.interface";
 const ajv = new Ajv();
 
 
-export default interface IAddCategory extends IServiceData {
+export interface IAddCategoryDto {
     name: string;
     hourlyPrice: number;
+} 
+
+export default interface IAddCategory extends IServiceData {
+    name: string;
+    hourly_price: number;
 }
 
 

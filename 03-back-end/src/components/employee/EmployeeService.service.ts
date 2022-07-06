@@ -34,27 +34,7 @@ export default class EmployeeService extends BaseService<EmployeeModel, Employee
 
 
     public async add(data: IAddEmployee): Promise<EmployeeModel>{
-        return new Promise<EmployeeModel>((resolve, reject) => {
-            const sql = "INSERT employee SET name = ?, employment = ?, jmbg = ?, category_id = ?;";
-
-            this.db.execute(sql, [ data.name, data.employment, data.jmbg, data.categoryId ])
-            .then(async result => {
-                const info: any = result;
-
-                const newEmployeeId = +(info[0]?.insertId);
-
-                const newEmployee: EmployeeModel|null = await this.getById(newEmployeeId, {});
-
-                if(newEmployee === null){
-                   return reject({message: "Duplicate jmbg for employee"});
-                }
-
-                resolve(newEmployee);
-            })
-            .catch(error => {
-                reject(error);
-            })
-        })
+        return this.baseAdd(data, {});
     }
 
     

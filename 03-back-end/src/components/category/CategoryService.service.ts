@@ -38,27 +38,7 @@ export default class CategoryService extends BaseService<CategoryModel, ICategor
 
     
     public async add(data: IAddCategory): Promise<CategoryModel>{
-        return new Promise<CategoryModel>((resolve, reject) => {
-            const sql = "INSERT category SET name = ?, hourly_price = ?;";
-
-            this.db.execute(sql, [ data.name, data.hourlyPrice ])
-            .then(async result => {
-                const info: any = result;
-
-                const newCategoryId = +(info[0]?.insertId);
-
-                const newCategory: CategoryModel|null = await this.getById(newCategoryId, DefaultCategoryAdapterOptions);
-
-                if(newCategory === null){
-                   return reject({message: "Duplicate category name"});
-                }
-
-                resolve(newCategory);
-            })
-            .catch(error => {
-                reject(error);
-            })
-        })
+        return this.baseAdd(data, {loadEmployees: false});
     }
 }
 

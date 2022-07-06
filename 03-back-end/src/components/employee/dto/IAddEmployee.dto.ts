@@ -13,7 +13,7 @@ interface IAddEmployee extends IServiceData {
     name: string;
     employment: number;
     jmbg: string;
-    categoryId: number;
+    category_id: number;
 }
 
 

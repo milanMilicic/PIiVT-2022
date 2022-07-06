@@ -73,6 +73,7 @@ export default abstract class BaseService<ReturnModel extends IModel, AdapterOpt
         });
     }
 
+                    //kao getAllEmployeesByCategoryId
     protected async getAllByFieldNameAndValue(fieldName: string, value: any, options: AdapterOptions): Promise<ReturnModel[]>{
         const tableName = this.tableName();
 
@@ -100,29 +101,36 @@ export default abstract class BaseService<ReturnModel extends IModel, AdapterOpt
         });
     }
     
-    protected async baseAdd(data: IServiceData): Promise<ReturnModel>{
+    protected async baseAdd(data: IServiceData, options: AdapterOptions): Promise<ReturnModel> {
         const tableName = this.tableName();
-        
-        return new Promise<ReturnModel>((resolve, reject) => {
-            const sql = "INSERT category SET name = ?, hourly_price = ?;";
 
-            this.db.execute(sql, [ data.name, data.hourlyPrice ])
+        return new Promise((resolve, reject) => {
+            const properties = Object.getOwnPropertyNames(data); 
+            const sqlPairs = properties.map(property => "`" + property + "` = ?").join(", ");
+            const values = properties.map(property => data[property]);  
+
+            const sql: string = "INSERT `" + tableName + "` SET " + sqlPairs + ";";
+
+            this.db.execute(sql, values)
             .then(async result => {
                 const info: any = result;
 
-                const newCategoryId = +(info[0]?.insertId);
+                const newItemId = +(info[0]?.insertId);
 
-                const newCategory: ReturnModel|null = await this.getById(newCategoryId, DefaultCategoryAdapterOptions);
+                const newItem: ReturnModel|null = await this.getById(newItemId, options);
 
-                if(newCategory === null){
-                   return reject({message: "Duplicate category name"});
+                if(newItem === null){
+                    reject({ message: 'Could not add a new item into the ' + tableName + ' table!', });
+                    return;
                 }
 
-                resolve(newCategory);
+                resolve(newItem);
             })
             .catch(error => {
                 reject(error);
-            })
-        })
+            });
+        });
     }
+
+
 }
