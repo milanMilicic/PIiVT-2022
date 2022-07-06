@@ -1,14 +1,18 @@
 import EmployeeModel from './EmployeeModel.model';
-import * as mysql2 from "mysql2/promise";
+import IAdapterOptions from '../../common/IAdapterOptions.interface';
+import BaseService from '../../common/BaseService';
 
-export default class EmployeeService {
-    private db: mysql2.Connection;
+interface EmployeeAdapteroptions extends IAdapterOptions {
 
-    constructor(databaseConnection: mysql2.Connection){
-        this.db = databaseConnection;
+}
+
+export default class EmployeeService extends BaseService<EmployeeModel, EmployeeAdapteroptions>{
+
+    tableName(): string {
+        return "employee";
     }
 
-    private async adapToModel(data: any): Promise<EmployeeModel>{
+    protected async adaptToModel(data: any): Promise<EmployeeModel>{
         const employee: EmployeeModel = new EmployeeModel();
 
         employee.employeeId = +data?.employee_id;
@@ -21,77 +25,10 @@ export default class EmployeeService {
         return employee;
     }
 
-    public async getAll(): Promise<EmployeeModel[]>{
-        return new Promise<EmployeeModel[]>((resolve, reject) => {
-            const sql = "SELECT * FROM employee;";
-            
-            this.db.execute(sql)
-            .then(async ([rows]) => {
 
-                if(rows === undefined){
-                    return resolve([]);
-                }
-
-                const categories: EmployeeModel[] = [];
-
-                for(let row of rows as mysql2.RowDataPacket[]){
-                    categories.push(await this.adapToModel(row));
-                }
-
-                resolve(categories);
-            })
-            .catch(error => {
-                reject(error);
-            });
-
-        });
+    public async getAllEmployeesByCategoryId(categoryId: number, options: EmployeeAdapteroptions): Promise<EmployeeModel[]>{
+        return this.getAllByFieldNameAndValue("category_id", categoryId, options);
     }
 
-    public async getById(employeeId: number): Promise<EmployeeModel|null>{
-        return new Promise<EmployeeModel>((resolve, reject) => {
-            const sql = "SELECT * FROM employee WHERE employee_id = ?;";
-
-            this.db.execute(sql, [ employeeId ])
-            .then(async ([rows]) => {
-
-                if(rows === undefined){
-                    return resolve(null);
-                }
-
-                if(Array.isArray(rows) && rows.length === 0){
-                    return resolve(null);
-                }
-
-                resolve(await this.adapToModel(rows[0]));
-            })
-            .catch(error => {
-                reject(error);
-            });
-        })
-    }
     
-    public async getEmployeesByCategoryId(categoryId: number): Promise<EmployeeModel[]>{
-        return new Promise<EmployeeModel[]>((resolve, reject) => {
-            const sql = "SELECT * FROM employee WHERE category_id = ?;";
-
-            this.db.execute(sql, [ categoryId ])
-            .then(async ([rows]) => {
-
-                if(rows === undefined){
-                    return resolve([]);
-                }
-
-                const employees: EmployeeModel[] = [];
-
-                for(let row of rows as mysql2.RowDataPacket[]){
-                    employees.push(await this.adapToModel(row));
-                }
-
-                resolve(employees);
-            })
-            .catch(error => {
-                reject(error);
-            });
-        })
-    }   
 }

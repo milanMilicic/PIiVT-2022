@@ -25,7 +25,7 @@ const AddCategoryValidator = ajv.compile({
     },
     required: [
         "name",
-        "hourlyPrice"
+        "hourlyPrice",
     ],
     additionalProperties: false,
 });

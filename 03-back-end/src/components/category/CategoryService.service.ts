@@ -1,8 +1,8 @@
 import CategoryModel from './CategoryModel.model';
-import * as mysql2 from "mysql2/promise";
 import IAdapterOptions from '../../common/IAdapterOptions.interface';
 import EmployeeService from '../employee/EmployeeService.service';
 import IAddCategory from './dto/IAddCategory.dto';
+import BaseService from '../../common/BaseService';
 
 interface ICategoryAdapterOptions extends IAdapterOptions {
     loadEmployees: boolean;
@@ -12,14 +12,14 @@ const DefaultCategoryAdapterOptions: ICategoryAdapterOptions = {
     loadEmployees: true,
 }
 
-export default class CategoryService {
-    private db: mysql2.Connection;
+export default class CategoryService extends BaseService<CategoryModel, ICategoryAdapterOptions> {
 
-    constructor(databaseConnection: mysql2.Connection){
-        this.db = databaseConnection;
+    tableName(): string {
+        return "category";
     }
 
-    private async adapToModel(data: any, options: ICategoryAdapterOptions = DefaultCategoryAdapterOptions): Promise<CategoryModel>{
+
+    protected async adaptToModel(data: any, options: ICategoryAdapterOptions = DefaultCategoryAdapterOptions): Promise<CategoryModel>{
         const category: CategoryModel = new CategoryModel();
 
         category.categoryId = +data?.category_id;
@@ -29,61 +29,13 @@ export default class CategoryService {
         if(options.loadEmployees){
             const employeeService: EmployeeService = new EmployeeService(this.db);
 
-            category.employees = await employeeService.getEmployeesByCategoryId(category.categoryId);
+            category.employees = await employeeService.getAllEmployeesByCategoryId(category.categoryId, {});
         }
 
 
         return category;
     }
 
-    public async getAll(): Promise<CategoryModel[]>{
-        return new Promise<CategoryModel[]>((resolve, reject) => {
-            const sql = "SELECT * FROM category ORDER BY hourly_price DESC;";
-            
-            this.db.execute(sql)
-            .then(async ([rows]) => {
-
-                if(rows === undefined){
-                    return resolve([]);
-                }
-
-                const categories: CategoryModel[] = [];
-
-                for(let row of rows as mysql2.RowDataPacket[]){
-                    categories.push(await this.adapToModel(row, {loadEmployees: false},));
-                }
-
-                resolve(categories);
-            })
-            .catch(error => {
-                reject(error);
-            });
-
-        });
-    }
-
-    public async getById(categoryId: number): Promise<CategoryModel|null>{
-        return new Promise<CategoryModel>((resolve, reject) => {
-            const sql = "SELECT * FROM category WHERE category_id = ?;";
-
-            this.db.execute(sql, [ categoryId ])
-            .then(async ([rows]) => {
-
-                if(rows === undefined){
-                    return resolve(null);
-                }
-
-                if(Array.isArray(rows) && rows.length === 0){
-                    return resolve(null);
-                }
-
-                resolve(await this.adapToModel(rows[0]));
-            })
-            .catch(error => {
-                reject(error);
-            });
-        })
-    }  
     
     public async add(data: IAddCategory): Promise<CategoryModel>{
         return new Promise((resolve, reject) => {
@@ -95,7 +47,7 @@ export default class CategoryService {
 
                 const newCategoryId = +(info[0]?.insertId);
 
-                const newCategory: CategoryModel|null = await this.getById(newCategoryId);
+                const newCategory: CategoryModel|null = await this.getById(newCategoryId, DefaultCategoryAdapterOptions);
 
                 if(newCategory === null){
                    return reject({message: "Duplicate category name"});
@@ -109,3 +61,5 @@ export default class CategoryService {
         })
     }
 }
+
+export { DefaultCategoryAdapterOptions };

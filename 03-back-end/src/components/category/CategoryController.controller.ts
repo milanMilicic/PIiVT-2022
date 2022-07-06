@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import CategoryService from './CategoryService.service';
+import CategoryService, { DefaultCategoryAdapterOptions } from './CategoryService.service';
 import IAddCategory, { AddCategoryValidator } from "./dto/IAddCategory.dto";
 
 export default class CategoryController {
@@ -10,7 +10,7 @@ export default class CategoryController {
     }
 
     async getAll(req: Request, res: Response){
-        this.categoryService.getAll()
+        this.categoryService.getAll(DefaultCategoryAdapterOptions)
         .then(result => {
             res.send(result);
         })
@@ -22,7 +22,7 @@ export default class CategoryController {
     async getById(req: Request, res: Response){
         const id: number = +req.params?.cid;
 
-        this.categoryService.getById(id)
+        this.categoryService.getById(id, DefaultCategoryAdapterOptions)
         .then(result => {
             if(result === null){
                 res.status(404).send('Category not found');
