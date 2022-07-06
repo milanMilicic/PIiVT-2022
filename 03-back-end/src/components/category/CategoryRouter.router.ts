@@ -8,9 +8,8 @@ import EmployeeService from "../employee/EmployeeService.service";
 export default class CategoryRouter implements IRouter {
     
     public setupRoutes(application: express.Application, resources: IApplicationResources){
-        const categoryService: CategoryService = new CategoryService(resources.databaseConnection);
-        const employeeService: EmployeeService = new EmployeeService(resources.databaseConnection);
-        const categoryController: CategoryController = new CategoryController(categoryService, employeeService);
+        
+        const categoryController: CategoryController = new CategoryController(resources.services);
 
         application.get('/api/category', categoryController.getAll.bind(categoryController));
         application.get('/api/category/:cid', categoryController.getById.bind(categoryController));

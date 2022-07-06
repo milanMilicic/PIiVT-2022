@@ -1,23 +1,16 @@
 import { Request, Response } from "express";
+import BaseController from "../../common/BaseController";
 import IAddEmployeeDto, { IAddEmployee } from "../employee/dto/IAddEmployee.dto";
 import { AddEmployeeValidator } from "../employee/dto/IAddEmployee.dto";
 import IEditEmployee, { EditEmployeeValidator, IEditEmployeeDto } from "../employee/dto/IEditEmployee.dto";
-import EmployeeService from "../employee/EmployeeService.service";
-import CategoryService, { DefaultCategoryAdapterOptions } from './CategoryService.service';
-import IAddCategory, { AddCategoryValidator, IAddCategoryDto } from "./dto/IAddCategory.dto";
+import { DefaultCategoryAdapterOptions } from './CategoryService.service';
+import { AddCategoryValidator, IAddCategoryDto } from "./dto/IAddCategory.dto";
 import IEditCategory, { EditCategoryValidator, IEditCategoryDto } from "./dto/IEditCategory.dto";
 
-export default class CategoryController {
-    private categoryService: CategoryService;
-    private employeeService: EmployeeService;
-
-    constructor(categoryService: CategoryService, employeeService: EmployeeService){
-        this.categoryService = categoryService;
-        this.employeeService = employeeService;
-    }
+export default class CategoryController extends BaseController {
 
     async getAll(req: Request, res: Response){
-        this.categoryService.getAll({loadEmployees: false})
+        this.services.category.getAll({loadEmployees: false})
         .then(result => {
             res.send(result);
         })
@@ -29,7 +22,7 @@ export default class CategoryController {
     async getById(req: Request, res: Response){
         const id: number = +req.params?.cid;
 
-        this.categoryService.getById(id, DefaultCategoryAdapterOptions)
+        this.services.category.getById(id, DefaultCategoryAdapterOptions)
         .then(result => {
             if(result === null){
                 res.status(404).send('Category not found');
@@ -49,7 +42,7 @@ export default class CategoryController {
             return res.status(400).send(AddCategoryValidator.errors)
         }
 
-        this.categoryService.add({name: data.name, hourly_price: data.hourlyPrice})
+        this.services.category.add({name: data.name, hourly_price: data.hourlyPrice})
         .then(result => {
             res.send(result);
         })
@@ -67,7 +60,7 @@ export default class CategoryController {
             return res.status(400).send(AddEmployeeValidator.errors)
         }
 
-        this.categoryService.getById(categoryId, {loadEmployees: false})
+        this.services.category.getById(categoryId, {loadEmployees: false})
         .then(result => {
             if(result === null){
                 res.sendStatus(404);
@@ -76,7 +69,7 @@ export default class CategoryController {
             const serviceData: IAddEmployee = {name: data.name, jmbg: data.jmbg, category_id: categoryId};
 
 
-            this.employeeService.add(serviceData)
+            this.services.employee.add(serviceData)
             .then(result => {
                 res.send(result);
             })
@@ -98,7 +91,7 @@ export default class CategoryController {
             return res.status(400).send(EditCategoryValidator.errors)
         }
 
-        this.categoryService.getById(categoryId, {loadEmployees: false})
+        this.services.category.getById(categoryId, {loadEmployees: false})
         .then(result => {
             if(result === null){
                 res.status(404).send('Category not found');
@@ -114,7 +107,7 @@ export default class CategoryController {
                 serviceData.hourly_price = data.hourlyPrice;
             }
 
-            this.categoryService.editById(categoryId, serviceData)
+            this.services.category.editById(categoryId, serviceData)
             .then(result => {
                 res.send(result);
             })
@@ -128,7 +121,7 @@ export default class CategoryController {
 
     }
 
-    editEmployee(req: Request, res: Response){
+    async editEmployee(req: Request, res: Response){
         const categoryId: number = +req.params?.cid;
         const employeeId: number = +req.params?.eid;
         const data = req.body as IEditEmployeeDto;
@@ -137,13 +130,13 @@ export default class CategoryController {
             return res.status(400).send(EditEmployeeValidator.errors)
         }
 
-        this.categoryService.getById(categoryId, {loadEmployees: false})
+        this.services.category.getById(categoryId, {loadEmployees: false})
         .then(result => {
             if(result === null){
                 return res.status(404).send('Category not found');
             }
 
-            this.employeeService.getById(employeeId, {})
+            this.services.employee.getById(employeeId, {})
             .then(result => {
                 if(result === null){
                     return res.status(404).send('Employee not found');
@@ -167,7 +160,7 @@ export default class CategoryController {
                     serviceData.is_active = data.isActive === true ? 1 : 0;
                 }
 
-                this.employeeService.edit(employeeId, serviceData)
+                this.services.employee.edit(employeeId, serviceData)
                 .then(result => {
                     return res.send(result);
                 });
@@ -175,10 +168,10 @@ export default class CategoryController {
             })
             .catch(error => {
                 res.status(500).send(error?.message);
-            })
+            });
         })
         .catch(error => {
             res.status(500).send(error?.message);
-        })
+        });
     }
 }

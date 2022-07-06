@@ -7,6 +7,8 @@ import * as morgan from "morgan";
 import IApplicationResources from "./common/IApplicationResources.interface";
 import * as mysql2 from "mysql2/promise";
 import routers from "./routers";
+import CategoryService from "./components/category/CategoryService.service";
+import EmployeeService from "./components/employee/EmployeeService.service";
 
 
 async function main(){
@@ -17,18 +19,27 @@ fs.mkdirSync(config.logging.path, {
     recursive: true,
 });
 
+const db = await mysql2.createConnection({
+    host: config.database.host,
+    port: config.database.port,
+    user: config.database.user,
+    password: config.database.password,
+    database: config.database.database,
+    charset: config.database.charset,
+    timezone: config.database.timezone,
+    supportBigNumbers: config.database.supportBigNumbers,
+});
+
 const resources: IApplicationResources = {
-    databaseConnection: await mysql2.createConnection({
-        host: config.database.host,
-        port: config.database.port,
-        user: config.database.user,
-        password: config.database.password,
-        database: config.database.database,
-        charset: config.database.charset,
-        timezone: config.database.timezone,
-        supportBigNumbers: config.database.supportBigNumbers,
-    })
-}
+    databaseConnection: db,
+    services: {
+        category: null,
+        employee: null,
+    },
+};
+
+resources.services.category = new CategoryService(db);
+resources.services.employee = new EmployeeService(db);
 
 const application: express.Application = express();
 
