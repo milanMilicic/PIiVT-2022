@@ -1,6 +1,7 @@
 import * as mysql2 from "mysql2/promise";
 import IAdapterOptions from "./IAdapterOptions.interface";
 import IModel from "./IModel.interface";
+import IServiceData from "./IServiceData.interface";
 
 export default abstract class BaseService<ReturnModel extends IModel, AdapterOptions extends IAdapterOptions> {
     private database: mysql2.Connection;
@@ -96,6 +97,32 @@ export default abstract class BaseService<ReturnModel extends IModel, AdapterOpt
             .catch(error => {
                 reject(error);
             });
+        });
+    }
+    
+    protected async baseAdd(data: IServiceData): Promise<ReturnModel>{
+        const tableName = this.tableName();
+        
+        return new Promise<ReturnModel>((resolve, reject) => {
+            const sql = "INSERT category SET name = ?, hourly_price = ?;";
+
+            this.db.execute(sql, [ data.name, data.hourlyPrice ])
+            .then(async result => {
+                const info: any = result;
+
+                const newCategoryId = +(info[0]?.insertId);
+
+                const newCategory: ReturnModel|null = await this.getById(newCategoryId, DefaultCategoryAdapterOptions);
+
+                if(newCategory === null){
+                   return reject({message: "Duplicate category name"});
+                }
+
+                resolve(newCategory);
+            })
+            .catch(error => {
+                reject(error);
+            })
         })
-    }   
+    }
 }

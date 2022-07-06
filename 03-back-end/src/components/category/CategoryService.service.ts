@@ -38,7 +38,7 @@ export default class CategoryService extends BaseService<CategoryModel, ICategor
 
     
     public async add(data: IAddCategory): Promise<CategoryModel>{
-        return new Promise((resolve, reject) => {
+        return new Promise<CategoryModel>((resolve, reject) => {
             const sql = "INSERT category SET name = ?, hourly_price = ?;";
 
             this.db.execute(sql, [ data.name, data.hourlyPrice ])
