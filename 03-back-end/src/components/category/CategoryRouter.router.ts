@@ -17,6 +17,7 @@ export default class CategoryRouter implements IRouter {
         application.put('/api/category/:cid', categoryController.editCategory.bind(categoryController));
         application.post('/api/category', categoryController.addCategory.bind(categoryController));
         application.post('/api/category/:cid/employee', categoryController.addEmployee.bind(categoryController));
+        application.put('/api/category/:cid/employee/:eid', categoryController.editEmployee.bind(categoryController));
     }
 
 }

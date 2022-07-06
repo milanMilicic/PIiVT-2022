@@ -132,7 +132,7 @@ export default abstract class BaseService<ReturnModel extends IModel, AdapterOpt
         });
     }
 
-    protected async baseEditById(id: number, data: IServiceData, options: AdapterOptions): Promise<ReturnModel> {
+    protected async baseEdit(id: number, data: IServiceData, options: AdapterOptions): Promise<ReturnModel> {
         const tableName = this.tableName();
 
         return new Promise((resolve, reject) => {

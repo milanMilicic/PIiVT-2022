@@ -4,20 +4,20 @@ import IServiceData from "../../../common/IServiceData.interface";
 const ajv = new Ajv();
 
 
-export default interface IAddEmployeeDto {
-    name: string;
+export interface IEditEmployeeDto {
+    name?: string;
+    isActive?: boolean;
     employment?: number;
-    jmbg: string;
-}
-interface IAddEmployee extends IServiceData {
-    name: string;
+} 
+
+export default interface IEditEmployee extends IServiceData {
+    name?: string;
+    is_active?: number;
     employment?: number;
-    jmbg: string;
-    category_id: number;
 }
 
 
-const AddEmployeeValidator = ajv.compile({
+const EditEmployeeValidator = ajv.compile({
     type: "object",
     properties: {
         name: {
@@ -25,22 +25,19 @@ const AddEmployeeValidator = ajv.compile({
             minLength: 3,
             maxLength: 32,
         },
+        isActive: {
+            type: "boolean", 
+        },
         employment: {
             type: "integer",
             minimum: 10,
             maximum: 100, 
         },
-        jmbg: {
-            type: "string",
-            minLength: 13,
-            maxLength: 13,
-        },
     },
     required: [
-        "name",
-        "jmbg",
+
     ],
     additionalProperties: false,
 });
 
-export { AddEmployeeValidator, IAddEmployee };
+export { EditEmployeeValidator };

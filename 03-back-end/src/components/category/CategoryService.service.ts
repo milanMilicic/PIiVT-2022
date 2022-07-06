@@ -42,7 +42,7 @@ export default class CategoryService extends BaseService<CategoryModel, ICategor
     }
 
     public async editById(categoryId: number, data: IEditCategory): Promise<CategoryModel>{
-        return this.baseEditById(categoryId, data, { loadEmployees: false });
+        return this.baseEdit(categoryId, data, { loadEmployees: false });
     }
 }
 

@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
-import IAddEmployeeDto from "../employee/dto/IAddEmployee.dto";
+import IAddEmployeeDto, { IAddEmployee } from "../employee/dto/IAddEmployee.dto";
 import { AddEmployeeValidator } from "../employee/dto/IAddEmployee.dto";
+import IEditEmployee, { EditEmployeeValidator, IEditEmployeeDto } from "../employee/dto/IEditEmployee.dto";
 import EmployeeService from "../employee/EmployeeService.service";
 import CategoryService, { DefaultCategoryAdapterOptions } from './CategoryService.service';
-import { AddCategoryValidator, IAddCategoryDto } from "./dto/IAddCategory.dto";
+import IAddCategory, { AddCategoryValidator, IAddCategoryDto } from "./dto/IAddCategory.dto";
 import IEditCategory, { EditCategoryValidator, IEditCategoryDto } from "./dto/IEditCategory.dto";
 
 export default class CategoryController {
@@ -16,7 +17,7 @@ export default class CategoryController {
     }
 
     async getAll(req: Request, res: Response){
-        this.categoryService.getAll(DefaultCategoryAdapterOptions)
+        this.categoryService.getAll({loadEmployees: false})
         .then(result => {
             res.send(result);
         })
@@ -72,7 +73,10 @@ export default class CategoryController {
                 res.sendStatus(404);
             }
 
-            this.employeeService.add({name: data.name, jmbg: data.jmbg, category_id: categoryId, employment: data.employment})
+            const serviceData: IAddEmployee = {name: data.name, jmbg: data.jmbg, category_id: categoryId};
+
+
+            this.employeeService.add(serviceData)
             .then(result => {
                 res.send(result);
             })
@@ -101,6 +105,7 @@ export default class CategoryController {
             }
 
             const serviceData: IEditCategory = {};
+
             if(data.name !== undefined){
                 serviceData.name = data.name;
             }
@@ -121,6 +126,59 @@ export default class CategoryController {
             res.status(500).send(error?.message);
         });
 
+    }
 
+    editEmployee(req: Request, res: Response){
+        const categoryId: number = +req.params?.cid;
+        const employeeId: number = +req.params?.eid;
+        const data = req.body as IEditEmployeeDto;
+
+        if(!EditEmployeeValidator(data)){
+            return res.status(400).send(EditEmployeeValidator.errors)
+        }
+
+        this.categoryService.getById(categoryId, {loadEmployees: false})
+        .then(result => {
+            if(result === null){
+                return res.status(404).send('Category not found');
+            }
+
+            this.employeeService.getById(employeeId, {})
+            .then(result => {
+                if(result === null){
+                    return res.status(404).send('Employee not found');
+                }
+
+                if(result.categoryId !== categoryId){
+                    return res.status(400).send('This employee does not belong to this category');
+                }
+
+                const serviceData: IEditEmployee = {};
+
+                if(data.name !== undefined){
+                    serviceData.name = data.name;
+                }
+
+                if(data.employment !== undefined){
+                    serviceData.employment = data.employment;
+                }
+
+                if(data.isActive !== undefined){
+                    serviceData.is_active = data.isActive === true ? 1 : 0;
+                }
+
+                this.employeeService.edit(employeeId, serviceData)
+                .then(result => {
+                    return res.send(result);
+                });
+
+            })
+            .catch(error => {
+                res.status(500).send(error?.message);
+            })
+        })
+        .catch(error => {
+            res.status(500).send(error?.message);
+        })
     }
 }
