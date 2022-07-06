@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `hourly_price` int(10) unsigned NOT NULL,
   PRIMARY KEY (`category_id`),
   UNIQUE KEY `uq_category_name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -55,13 +55,15 @@ DROP TABLE IF EXISTS `employee`;
 CREATE TABLE IF NOT EXISTS `employee` (
   `employee_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `jmbg` varchar(13) COLLATE utf8_unicode_ci NOT NULL,
   `is_active` tinyint(1) unsigned NOT NULL DEFAULT 1,
   `employment` int(10) unsigned NOT NULL DEFAULT 100,
   `category_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`employee_id`),
+  UNIQUE KEY `jmbg` (`jmbg`),
   KEY `fk_employee_category_id` (`category_id`),
   CONSTRAINT `fk_employee_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 
