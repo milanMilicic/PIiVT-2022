@@ -9,6 +9,7 @@ import * as mysql2 from "mysql2/promise";
 import routers from "./routers";
 import CategoryService from "./components/category/CategoryService.service";
 import EmployeeService from "./components/employee/EmployeeService.service";
+import UserService from "./components/user/UserService.service";
 
 
 async function main(){
@@ -35,11 +36,13 @@ const resources: IApplicationResources = {
     services: {
         category: null,
         employee: null,
+        user: null,
     },
 };
 
 resources.services.category = new CategoryService(db);
 resources.services.employee = new EmployeeService(db);
+resources.services.user = new UserService(db);
 
 const application: express.Application = express();
 

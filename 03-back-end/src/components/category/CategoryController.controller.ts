@@ -15,7 +15,7 @@ export default class CategoryController extends BaseController {
             res.send(result);
         })
         .catch(error => {
-            res.status(500).send(error?.message)
+            res.status(500).send(error?.message);
         })
     }
 

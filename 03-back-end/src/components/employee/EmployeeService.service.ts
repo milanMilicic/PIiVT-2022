@@ -5,7 +5,7 @@ import { IAddEmployee } from './dto/IAddEmployee.dto';
 import IEditEmployee from './dto/IEditEmployee.dto';
 
 interface EmployeeAdapterOptions extends IAdapterOptions {
-
+    
 }
 
 export default class EmployeeService extends BaseService<EmployeeModel, EmployeeAdapterOptions>{
