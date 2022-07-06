@@ -1,6 +1,7 @@
 import BaseService from "../../common/BaseService";
 import IAdapterOptions from "../../common/IAdapterOptions.interface";
 import UserModel from "./UserModel.model";
+import IAddUser from './dto/IAddUser.dto';
 
 export interface UserAdapterOptions extends IAdapterOptions {
     showPasswordHash: boolean;
@@ -14,6 +15,7 @@ export default class UserService extends BaseService<UserModel, UserAdapterOptio
     tableName(): string {
         return "user"
     }
+
     protected async adaptToModel(data: any, options: UserAdapterOptions = DefaultUserAdapterOptions): Promise<UserModel> {
         const user: UserModel = new UserModel();
 
@@ -27,6 +29,10 @@ export default class UserService extends BaseService<UserModel, UserAdapterOptio
 
 
         return user;
+    }
+
+    public async addUser(data: IAddUser): Promise<UserModel>{
+        return this.baseAdd(data, DefaultUserAdapterOptions);
     }
 
 }

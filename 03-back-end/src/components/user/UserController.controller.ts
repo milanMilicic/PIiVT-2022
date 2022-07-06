@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import BaseController from "../../common/BaseController";
+import { AddUserValidator, IAddUserDto } from "./dto/IAddUser.dto";
 import { DefaultUserAdapterOptions } from "./UserService.service";
+import * as bcrypt from "bcrypt";
 
 export default class UserController extends BaseController {
 
@@ -32,6 +34,25 @@ export default class UserController extends BaseController {
     }
 
     async addUser(req: Request, res: Response){
+        const data = req.body as IAddUserDto;
+
+        if(!AddUserValidator(data)){
+            return res.status(400).send(AddUserValidator.errors);
+        }
+
+        const salt = bcrypt.genSaltSync(10);
+        const passwordHash = bcrypt.hashSync(data.password, salt);
+
+        this.services.user.addUser({
+            username: data.username,
+            password_hash: passwordHash,
+        })
+        .then(result => {
+            res.send(result);
+        })
+        .catch(error => {
+            res.status(500).send(error?.message);
+        });
         
     }
 }

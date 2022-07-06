@@ -57,7 +57,7 @@ export default class CategoryController extends BaseController {
         const data = req.body as IAddEmployeeDto;
 
         if(!AddEmployeeValidator(data)){
-            return res.status(400).send(AddEmployeeValidator.errors)
+            return res.status(400).send(AddEmployeeValidator.errors);
         }
 
         this.services.category.getById(categoryId, {loadEmployees: false})
