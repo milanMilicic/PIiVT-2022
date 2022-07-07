@@ -40,6 +40,22 @@ export default class UserService extends BaseService<UserModel, UserAdapterOptio
         return this.baseEdit(userId, data, DefaultUserAdapterOptions);
     }
 
+    public async getByUsername(username: string): Promise<UserModel|null>{
+        return new Promise((resolve, reject) => {
+            this.getAllByFieldNameAndValue("username", username, {showPasswordHash: true})
+            .then(result => {
+                if(result.length === 0){
+                    return resolve(null);
+                }
+
+                resolve(result[0]);
+            })
+            .catch(error => {
+                reject(error);
+            });
+        });
+    }
+
 }
 
 export { DefaultUserAdapterOptions };

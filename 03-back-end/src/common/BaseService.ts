@@ -136,7 +136,7 @@ export default abstract class BaseService<ReturnModel extends IModel, AdapterOpt
         const tableName = this.tableName();
 
         return new Promise((resolve, reject) => {
-            const properties = Object.getOwnPropertyNames(data); 
+            const properties = Object.getOwnPropertyNames(data);
 
             if(properties.length === 0){       // ako smo slali prazan objekat kada editujemo nesto u bazi
                 return reject({message: "There is nothing to change!", })
