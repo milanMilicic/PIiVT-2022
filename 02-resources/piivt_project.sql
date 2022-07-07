@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `hourly_price` int(10) unsigned NOT NULL,
   PRIMARY KEY (`category_id`),
   UNIQUE KEY `uq_category_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
   UNIQUE KEY `jmbg` (`jmbg`),
   KEY `fk_employee_category_id` (`category_id`),
   CONSTRAINT `fk_employee_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -104,11 +104,11 @@ CREATE TABLE IF NOT EXISTS `salary` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `username` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `password_hash` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`user_id`),
-  UNIQUE KEY `uq_user_email` (`username`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  UNIQUE KEY `uq_user_username` (`username`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 
