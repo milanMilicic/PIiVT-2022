@@ -1,6 +1,5 @@
 import BaseService from "../../common/BaseService";
 import IAdapterOptions from "../../common/IAdapterOptions.interface";
-import EmployeeModel from "../employee/EmployeeModel.model";
 import { IAddSalary } from "./dto/IAddSalary.dto";
 import SalaryModel from "./SalaryModel.model";
 
