@@ -1,3 +1,4 @@
+import { readFileSync } from "fs";
 import IConfig from "./common/IConfig.interface";
 
 const DevConfig: IConfig = {
@@ -28,6 +29,28 @@ const DevConfig: IConfig = {
         filename: "access.log",
         format: ":date[iso]\t:remote-addr\t:method\t:url\t:status\t:res[content-length] bytes\t:response-time ms",
     },
+    auth: {
+        user: {
+            algorithm: "RS256",
+            issuer: "PIiVT",
+            tokens: {
+                auth: {
+                    duration: 60 * 60 * 24, //Za dev: 24h - inace treba par minuta
+                    keys: {
+                        private: readFileSync("./.keystore/app.private", "ascii"),
+                        public: readFileSync("./.keystore/app.public", "ascii"),
+                    },
+                },
+                refresh: {
+                    duration: 60 * 60 * 24 * 60, //Za dev: 60 dana - inace treba oko mesec dana
+                    keys: {
+                        private: readFileSync("./.keystore/app.private", "ascii"),
+                        public: readFileSync("./.keystore/app.public", "ascii"),
+                    } 
+                }
+            },
+        },
+    }
 }
 
 export default DevConfig;
