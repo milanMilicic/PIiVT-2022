@@ -39,7 +39,7 @@ export default class CategoryController extends BaseController {
         const data = req.body as IAddCategoryDto;
 
         if(!AddCategoryValidator(data)){
-            return res.status(400).send(AddCategoryValidator.errors)
+            return res.status(400).send(AddCategoryValidator.errors);
         }
 
         this.services.category.add({name: data.name, hourly_price: data.hourlyPrice})
