@@ -3,6 +3,8 @@ import BaseController from "../../common/BaseController";
 import { AddUserValidator, IAddUserDto } from "./dto/IAddUser.dto";
 import { DefaultUserAdapterOptions } from "./UserService.service";
 import * as bcrypt from "bcrypt";
+import { EditUserValidator, IEditUserDto } from "./dto/IEditUser.dto";
+import IEditUser from './dto/IEditUser.dto';
 
 export default class UserController extends BaseController {
 
@@ -33,7 +35,7 @@ export default class UserController extends BaseController {
         });
     }
 
-    async addUser(req: Request, res: Response){
+    async add(req: Request, res: Response){
         const data = req.body as IAddUserDto;
 
         if(!AddUserValidator(data)){
@@ -53,6 +55,36 @@ export default class UserController extends BaseController {
         .catch(error => {
             res.status(500).send(error?.message);
         });
-        
     }
+
+
+    async edit(req: Request, res: Response){
+        const userId: number = +req.params.uid;
+        const data = req.body as IEditUserDto;
+
+        if(!EditUserValidator(data)){
+            return res.status(400).send(EditUserValidator.errors);
+        }
+
+        const serviceData: IEditUser = {};
+
+        if(data.username !== undefined){
+            serviceData.username = data.username;
+        }
+
+        if(data.password !== undefined){
+            const salt = bcrypt.genSaltSync(10);
+            const passwordHash = bcrypt.hashSync(data.password, salt);
+            serviceData.password_hash = passwordHash;
+        }
+        this.services.user.editUser(userId, serviceData)
+        .then(result => {
+            res.send(result);
+        })
+        .catch(error => {
+            res.status(500).send(error?.message);
+        });
+
+    }
+
 }

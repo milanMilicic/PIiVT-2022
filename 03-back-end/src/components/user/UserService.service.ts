@@ -2,6 +2,7 @@ import BaseService from "../../common/BaseService";
 import IAdapterOptions from "../../common/IAdapterOptions.interface";
 import UserModel from "./UserModel.model";
 import IAddUser from './dto/IAddUser.dto';
+import IEditUser from "./dto/IEditUser.dto";
 
 export interface UserAdapterOptions extends IAdapterOptions {
     showPasswordHash: boolean;
@@ -33,6 +34,10 @@ export default class UserService extends BaseService<UserModel, UserAdapterOptio
 
     public async addUser(data: IAddUser): Promise<UserModel>{
         return this.baseAdd(data, DefaultUserAdapterOptions);
+    }
+
+    public async editUser(userId: number, data: IEditUser): Promise<UserModel>{
+        return this.baseEdit(userId, data, DefaultUserAdapterOptions);
     }
 
 }
