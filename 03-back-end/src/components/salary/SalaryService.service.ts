@@ -1,6 +1,7 @@
 import BaseService from "../../common/BaseService";
 import IAdapterOptions from "../../common/IAdapterOptions.interface";
 import EmployeeModel from "../employee/EmployeeModel.model";
+import { IAddSalary } from "./dto/IAddSalary.dto";
 import SalaryModel from "./SalaryModel.model";
 
 export interface SalaryAdapterOptions extends IAdapterOptions {
@@ -13,7 +14,6 @@ export default class SalaryService extends BaseService<SalaryModel, SalaryAdapte
     }
     protected async adaptToModel(data: any, options: SalaryAdapterOptions): Promise<SalaryModel> {
         const salary: SalaryModel = new SalaryModel();
-        const employee: EmployeeModel = new EmployeeModel();
 
         salary.salaryId = +data?.salary_id;
         salary.employeeId = +data?.employee_id;
@@ -34,6 +34,10 @@ export default class SalaryService extends BaseService<SalaryModel, SalaryAdapte
 
     public async getByMonthId(monthId: number): Promise<SalaryModel[]>{
         return this.getAllByFieldNameAndValue("month_id", monthId, {});
+    }
+
+    public async add(data: IAddSalary): Promise<SalaryModel>{
+        return this.baseAdd(data, {});
     }
     
 }
