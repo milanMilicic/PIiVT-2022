@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `calculation`;
 CREATE TABLE IF NOT EXISTS `calculation` (
   `calculation_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `month_id` int(10) unsigned NOT NULL,
+  `year` year(4) NOT NULL,
   `PIO` decimal(10,2) unsigned NOT NULL,
   `health_care` decimal(10,2) unsigned NOT NULL,
   `social_care` decimal(10,2) unsigned NOT NULL,
@@ -63,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
   UNIQUE KEY `jmbg` (`jmbg`),
   KEY `fk_employee_category_id` (`category_id`),
   CONSTRAINT `fk_employee_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -74,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `month` (
   `name` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`month_id`),
   UNIQUE KEY `uq_month_name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -85,6 +86,7 @@ CREATE TABLE IF NOT EXISTS `salary` (
   `employee_id` int(10) unsigned NOT NULL,
   `work_hours` int(10) unsigned NOT NULL,
   `month_id` int(10) unsigned NOT NULL,
+  `year` year(4) NOT NULL,
   `gross_worth` decimal(10,2) unsigned NOT NULL,
   `health_care` decimal(10,2) unsigned NOT NULL,
   `social_care` decimal(10,2) unsigned NOT NULL,
@@ -92,11 +94,11 @@ CREATE TABLE IF NOT EXISTS `salary` (
   `tax` decimal(10,2) unsigned NOT NULL,
   `net_worth` decimal(10,2) unsigned NOT NULL,
   PRIMARY KEY (`salary_id`),
-  KEY `fk_salary_employee_id` (`employee_id`),
+  UNIQUE KEY `employee_id_month_id_year` (`employee_id`,`month_id`,`year`),
   KEY `fk_salary_month_id` (`month_id`),
   CONSTRAINT `fk_salary_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`) ON UPDATE CASCADE,
   CONSTRAINT `fk_salary_month_id` FOREIGN KEY (`month_id`) REFERENCES `month` (`month_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 
