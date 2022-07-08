@@ -12,6 +12,7 @@ export default class CalculationRouter implements IRouter {
         application.get('/api/calculation', calculationController.getAll.bind(calculationController));
         application.get('/api/calculation/year/:yid', calculationController.getByYear.bind(calculationController));
         application.get('/api/calculation/month/:mid', calculationController.getByMonth.bind(calculationController));
+        application.get('/api/calculation/year/:yid/month/:mid', calculationController.getByYearAndMonth.bind(calculationController));
        
         
     }

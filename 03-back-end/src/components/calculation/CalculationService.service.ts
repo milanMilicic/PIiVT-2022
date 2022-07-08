@@ -29,12 +29,16 @@ export default class CalculationService extends BaseService<CalculationModel, Ca
         return calculation;
     }
 
-    public async getByYearNumber(year: number): Promise<CalculationModel[]>{
+    public async getAllByYearNumber(year: number): Promise<CalculationModel[]>{
         return this.getAllByFieldNameAndValue("year", year, {});
     }
 
-    public async getByMonthId(monthId: number): Promise<CalculationModel[]>{
+    public async getAllByMonthId(monthId: number): Promise<CalculationModel[]>{
         return this.getAllByFieldNameAndValue("month_id", monthId, {});
+    }
+
+    public async getByYearAndMonth(year: number, monthId: number): Promise<CalculationModel|null>{
+        return this.getAllByFieldNamesAndValues("year", "month_id", year, monthId, {});
     }
 
 }
