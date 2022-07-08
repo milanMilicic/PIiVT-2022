@@ -11,6 +11,7 @@ import CategoryService from "./components/category/CategoryService.service";
 import EmployeeService from "./components/employee/EmployeeService.service";
 import UserService from "./components/user/UserService.service";
 import SalaryService from "./components/salary/SalaryService.service";
+import CalculationService from "./components/calculation/CalculationService.service";
 
 
 async function main(){
@@ -39,6 +40,7 @@ const resources: IApplicationResources = {
         employee: null,
         user: null,
         salary: null,
+        calculation: null,
     },
 };
 
@@ -46,6 +48,7 @@ resources.services.category = new CategoryService(db);
 resources.services.employee = new EmployeeService(db);
 resources.services.user = new UserService(db);
 resources.services.salary = new SalaryService(db);
+resources.services.calculation = new CalculationService(db);
 
 const application: express.Application = express();
 
