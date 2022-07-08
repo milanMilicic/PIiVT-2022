@@ -12,6 +12,7 @@ export default interface IAddSalaryDto {
 interface IAddSalary extends IServiceData {
     employee_id: number;
     month_id: number;
+    year: number;
     work_hours: number;
     gross_worth: number;
     net_worth: number;

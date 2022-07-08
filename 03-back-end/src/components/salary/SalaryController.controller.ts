@@ -34,6 +34,7 @@ export default class SalaryController extends BaseController{
     async addSalary(req: Request, res: Response){
         const monthId: number = +req.params.mid;
         const employeeId: number = +req.params.eid;
+        const year: number = +req.params.yid;
         const data = req.body as IAddSalaryDto;
 
         if(!AddSalaryValidator(data)){
@@ -79,6 +80,7 @@ export default class SalaryController extends BaseController{
             const serviceData: IAddSalary = {
                 employee_id: employeeId,
                 month_id: monthId,
+                year: year,
                 work_hours: data.workHours,
                 gross_worth: grossWorth,
                 health_care: healthCare,

@@ -18,6 +18,7 @@ export default class SalaryService extends BaseService<SalaryModel, SalaryAdapte
         salary.employeeId = +data?.employee_id;
         salary.monthId = +data?.month_id;
 
+        salary.year = +data?.year;
         salary.workHours = +data?.work_hours;
         salary.healthCare = +data?.health_care;
         salary.socialCare = +data?.social_care;

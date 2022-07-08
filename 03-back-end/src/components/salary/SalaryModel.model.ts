@@ -5,6 +5,7 @@ export default class SalaryModel implements IModel {
     employeeId: number;
     monthId: number;
 
+    year: number;
     workHours: number;
     healthCare: number;
     socialCare: number;
