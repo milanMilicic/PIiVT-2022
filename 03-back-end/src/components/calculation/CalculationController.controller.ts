@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import BaseController from "../../common/BaseController";
+import SalaryModel from "../salary/SalaryModel.model";
+import IAddCalculationDto, { IAddCalculation } from "./dto/IAddCalculation.dto";
 
 export default class CalculationController extends BaseController {
 
@@ -56,7 +58,7 @@ export default class CalculationController extends BaseController {
 
         this.services.calculation.getByYearAndMonth(year, monthId)
         .then(result => {
-            if(result === null){
+            if(result.length === 0){
                 return res.status(404).send(`Calculation for year ${year} and month ${monthId} not found`)
             }
 
@@ -65,6 +67,57 @@ export default class CalculationController extends BaseController {
         .catch(error => {
             res.status(500).send(error?.message);
         });
+    }
+
+
+    async add(req: Request, res: Response){
+        const data = req.body as IAddCalculationDto;
+
+        this.services.salary.getAllByFieldNamesAndValues("year", "month_id", data.year, data.monthId, {})
+        .then(salaries => {
+            if(salaries.length === 0){
+                return res.status(404).send("Salaries not found");
+            }
+
+            return salaries;
+        })
+        .then(result => {
+            const salaries = result as SalaryModel[];
+            let pio = 0;
+            let tax = 0;
+            let socialCare = 0; 
+            let healthCare = 0
+            let grossWorth = 0; 
+            let netWorth = 0;
+
+            for(let salary of salaries){
+                pio = salary.pio + pio;
+                tax = salary.tax + tax;
+                socialCare = salary.socialCare + socialCare;
+                healthCare = salary.healthCare + healthCare;
+                grossWorth = salary.grossWorth + grossWorth;
+                netWorth = salary.netWorth + netWorth;
+            }
+
+            return {
+                pio,
+                tax,
+                socialCare,
+                healthCare,
+                grossWorth,
+                netWorth,
+            }
+ 
+        })
+        .then(async result => {
+            const serviceData: IAddCalculation = {year: data.year, month_id: data.monthId, gross_worth: result.grossWorth, net_worth: result.netWorth, health_care: result.healthCare, social_care: result.socialCare, pio: result.pio, tax: result.tax};
+
+            res.send(await this.services.calculation.addCalculation(serviceData));
+        })
+        .catch(error => {
+            res.status(500).send(error?.message);
+        });
+
     }
 
 }

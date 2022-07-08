@@ -101,24 +101,27 @@ export default abstract class BaseService<ReturnModel extends IModel, AdapterOpt
         });
     }
 
-    protected async getAllByFieldNamesAndValues(fieldName1: string, fieldName2: string, value1: any, value2: any, options: AdapterOptions): Promise<ReturnModel|null>{
+                    // pretrazujemo po vise kriterijuma
+    public async getAllByFieldNamesAndValues(fieldName1: string, fieldName2: string, value1: any, value2: any, options: AdapterOptions): Promise<ReturnModel[]>{
         const tableName = this.tableName();
 
-        return new Promise<ReturnModel>((resolve, reject) => {
+        return new Promise<ReturnModel[]>((resolve, reject) => {
             const sql = `SELECT * FROM ${tableName} WHERE ${fieldName1} = ? AND ${fieldName2} = ?;`;
 
             this.db.execute(sql, [ value1, value2 ])
             .then(async ([rows]) => {
 
                 if(rows === undefined){
-                    return resolve(null);
+                    return resolve([]);
                 }
 
-                if(Array.isArray(rows) && rows.length === 0){
-                    return resolve(null);
+                const items: ReturnModel[] = [];
+
+                for(let row of rows as mysql2.RowDataPacket[]){
+                    items.push(await this.adaptToModel(row, options));
                 }
 
-                resolve(await this.adaptToModel(rows[0], options));
+                resolve(items);
             })
             .catch(error => {
                 reject(error);

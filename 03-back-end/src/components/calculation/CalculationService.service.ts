@@ -1,6 +1,8 @@
 import BaseService from "../../common/BaseService";
 import IAdapterOptions from "../../common/IAdapterOptions.interface";
+import SalaryModel from "../salary/SalaryModel.model";
 import CalculationModel from "./CalculationModel.model";
+import { IAddCalculation } from "./dto/IAddCalculation.dto";
 
 export interface CalucaltionAdapterOptions extends IAdapterOptions {
     
@@ -37,8 +39,16 @@ export default class CalculationService extends BaseService<CalculationModel, Ca
         return this.getAllByFieldNameAndValue("month_id", monthId, {});
     }
 
-    public async getByYearAndMonth(year: number, monthId: number): Promise<CalculationModel|null>{
+    public async getByYearAndMonth(year: number, monthId: number): Promise<CalculationModel[]>{
         return this.getAllByFieldNamesAndValues("year", "month_id", year, monthId, {});
+    }
+
+    /* public async getAllSalariesByMonthAndYear(year: number, monthId: number): Promise<SalaryModel[]>{
+        return this.getAllByFieldNamesAndValues("year", "month_id", year, monthId, {});
+    } */
+
+    public async addCalculation(data: IAddCalculation): Promise<CalculationModel>{
+        return this.baseAdd(data, {});
     }
 
 }
