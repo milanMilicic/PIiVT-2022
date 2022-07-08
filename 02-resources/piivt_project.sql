@@ -33,9 +33,9 @@ CREATE TABLE IF NOT EXISTS `calculation` (
   `net_worth` decimal(10,2) unsigned NOT NULL,
   `gross_worth` decimal(10,2) unsigned NOT NULL,
   PRIMARY KEY (`calculation_id`),
-  KEY `fk_calculation_month_id` (`month_id`),
+  UNIQUE KEY `month_id_year` (`month_id`,`year`),
   CONSTRAINT `fk_calculation_month_id` FOREIGN KEY (`month_id`) REFERENCES `month` (`month_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 
