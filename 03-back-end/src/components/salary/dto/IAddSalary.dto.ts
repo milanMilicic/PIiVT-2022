@@ -30,7 +30,7 @@ const AddSalaryValidator = ajv.compile({
         workHours: {
             type: "integer",
             minimum: 8,
-            maximum: 250,
+            maximum: 160,
         },
     },
     required: [
