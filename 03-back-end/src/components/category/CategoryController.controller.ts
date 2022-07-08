@@ -66,7 +66,7 @@ export default class CategoryController extends BaseController {
                 res.sendStatus(404);
             }
 
-            const serviceData: IAddEmployee = {name: data.name, jmbg: data.jmbg, category_id: categoryId};
+            const serviceData: IAddEmployee = {name: data.name, jmbg: data.jmbg, employment: data.employment, category_id: categoryId};
 
 
             this.services.employee.add(serviceData)
