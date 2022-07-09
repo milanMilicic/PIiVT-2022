@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `calculation` (
   PRIMARY KEY (`calculation_id`),
   UNIQUE KEY `month_id_year` (`month_id`,`year`),
   CONSTRAINT `fk_calculation_month_id` FOREIGN KEY (`month_id`) REFERENCES `month` (`month_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
   UNIQUE KEY `jmbg` (`jmbg`),
   KEY `fk_employee_category_id` (`category_id`),
   CONSTRAINT `fk_employee_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `salary` (
   KEY `fk_salary_month_id` (`month_id`),
   CONSTRAINT `fk_salary_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`) ON UPDATE CASCADE,
   CONSTRAINT `fk_salary_month_id` FOREIGN KEY (`month_id`) REFERENCES `month` (`month_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password_hash` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `uq_user_username` (`username`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Data exporting was unselected.
 
