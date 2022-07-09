@@ -43,10 +43,6 @@ export default class CalculationService extends BaseService<CalculationModel, Ca
         return this.getAllByFieldNamesAndValues("year", "month_id", year, monthId, {});
     }
 
-    /* public async getAllSalariesByMonthAndYear(year: number, monthId: number): Promise<SalaryModel[]>{
-        return this.getAllByFieldNamesAndValues("year", "month_id", year, monthId, {});
-    } */
-
     public async addCalculation(data: IAddCalculation): Promise<CalculationModel>{
         return this.baseAdd(data, {});
     }
