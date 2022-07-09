@@ -1,0 +1,548 @@
+{
+	"info": {
+		"_postman_id": "4a163823-9440-4395-b2a5-553fa6086a6e",
+		"name": "PIIVT Ispit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get all categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/category",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/category/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Security\",\r\n    \"hourlyPrice\": 800\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/category",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit single category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Manager\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/category/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employee",
+			"item": [
+				{
+					"name": "Add new employee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dejan Ilic\",\r\n    \"employment\": 60,\r\n    \"jmbg\": \"6983121841001\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/category/12/employee",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"category",
+								"12",
+								"employee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit an employee",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dejan Ilic\",\r\n    \"isActive\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/category/12/employee/16",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"category",
+								"12",
+								"employee",
+								"16"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/user",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/user/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"noviuser\",\r\n    \"password\": \"Testtest-1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/user",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit single user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"Novipassword1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/user/7",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "User login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"noviuser\",\r\n    \"password\": \"Novipassword1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/auth/user/login",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh auth token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlkIjo3LCJpZGVudGl0eSI6Im5vdml1c2VyIiwiaWF0IjoxNjU3Mzc5MDIwLCJleHAiOjE2NjI1NjMwMjAsImlzcyI6IlBJaVZUIn0.NKRtBRYeFmW-Pv9CeDEBQ1TMAhcoDajjgcQZwNaXLpgacQLSCXihYyuUP_awZ4oGVR6fEIELAtyKdfO_tG88R6EQo2GyLzwflrtS57rhz2nLoDHOtyIIczAyeo95n1bqAS7THOfPDI_KaMSKdQGIdP8j8XYcgswbOVR2If0gnmntwDgp6XP4kNh89vobNmbO5M-Y7g7piZm9XsuuwRQjdDnfDt4c_6o3S6b924PGCiSPMlO1k2ShSF24Mv_SysLYAeamBqQx056q6htqX8R7Fo7IJj7Nm8ZsfjO9ACegpm_JwIxS2EWbTkFPT73NHUCO56f4mY0HqLaailJJfc0sQg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/auth/user/refresh",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"user",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Salary",
+			"item": [
+				{
+					"name": "Get all salaries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/salary",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"salary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get salaries by specified year and month",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/salary/year/2021/month/4",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"salary",
+								"year",
+								"2021",
+								"month",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add salary for employee for specific month",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"workHours\": 160\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/salary/year/2022/month/3/employee/16",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"salary",
+								"year",
+								"2022",
+								"month",
+								"3",
+								"employee",
+								"16"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Calculation",
+			"item": [
+				{
+					"name": "Get all calculations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/calculation",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"calculation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all calculations by year",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/calculation/year/2022",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"calculation",
+								"year",
+								"2022"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all calculation by month",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/calculation/month/3",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"calculation",
+								"month",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get calculation for specified year and month",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}} /api/calculation/year/2022/month/3",
+							"host": [
+								"{{API_URL}} "
+							],
+							"path": [
+								"api",
+								"calculation",
+								"year",
+								"2022",
+								"month",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add calculation for specifed year and month",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\": 2022,\r\n    \"monthId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/calculation",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"calculation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_URL",
+			"value": "http://localhost:10000",
+			"type": "default"
+		}
+	]
+}
