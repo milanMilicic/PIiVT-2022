@@ -17,11 +17,12 @@ export default class SalaryController extends BaseController{
 
     async getById(req: Request, res: Response){
         const monthId: number = +req.params.mid;
+        const year: number = +req.params.yid;
 
-        this.services.salary.getByMonthId(monthId)
+        this.services.salary.getByYearAndMonthId(year, monthId)
         .then(result => {
             if(result.length === 0){
-                return res.status(404).send("No salaries for specified month");
+                return res.status(404).send("No salaries for specified year and month");
             }
 
             res.send(result);

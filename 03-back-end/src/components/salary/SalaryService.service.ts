@@ -32,8 +32,8 @@ export default class SalaryService extends BaseService<SalaryModel, SalaryAdapte
     }
 
 
-    public async getByMonthId(monthId: number): Promise<SalaryModel[]>{
-        return this.getAllByFieldNameAndValue("month_id", monthId, {});
+    public async getByYearAndMonthId(year: number, monthId: number): Promise<SalaryModel[]>{
+        return this.getAllByFieldNamesAndValues("year", "month_id", year, monthId, {});
     }
 
     public async add(data: IAddSalary): Promise<SalaryModel>{
