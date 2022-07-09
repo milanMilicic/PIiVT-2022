@@ -50,6 +50,12 @@ export default class SalaryController extends BaseController{
                };
             }
 
+            if(employee.isActive === false){
+                throw {
+                    message: "Employee is not active",
+                };
+            }
+
             return employee;
         })
         .then(async employee => {
