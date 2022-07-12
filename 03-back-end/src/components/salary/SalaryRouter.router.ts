@@ -12,7 +12,7 @@ export default class SalaryRouter implements IRouter {
         application.get('/api/salary', salaryController.getAll.bind(salaryController));
         application.get('/api/salary/year/:yid/month/:mid', salaryController.getById.bind(salaryController));
         application.post('/api/salary/year/:yid/month/:mid/employee/:eid', salaryController.addSalary.bind(salaryController));
-        
+        application.get('/api/employee/:eid/salary', salaryController.getSalaryByEmployeeId.bind(salaryController));
     }
 
 }

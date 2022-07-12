@@ -39,5 +39,9 @@ export default class SalaryService extends BaseService<SalaryModel, SalaryAdapte
     public async add(data: IAddSalary): Promise<SalaryModel>{
         return this.baseAdd(data, {});
     }
+
+    public async getAllSalaryByEmployeeId(employeeId: number): Promise<SalaryModel[]>{
+        return this.getAllByFieldNameAndValue("employee_id", employeeId, {});
+    }
     
 }

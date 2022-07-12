@@ -108,4 +108,21 @@ export default class SalaryController extends BaseController{
         });
 
     }
+
+    async getSalaryByEmployeeId(req: Request, res: Response){
+        const employeeId: number = +req.params.eid;
+
+        this.services.salary.getAllSalaryByEmployeeId(employeeId)
+        .then(result => {
+            if(result.length === 0){
+                return res.status(404).send("No salaries for given employee");
+            }
+
+            res.send(result);
+        })
+        .catch(error => {
+            res.status(500).send(error?.message);
+        });
+
+    }
 }
