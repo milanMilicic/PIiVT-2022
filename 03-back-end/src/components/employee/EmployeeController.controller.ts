@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import BaseController from "../../common/BaseController";
 
 export default class EmployeeController extends BaseController{
-    getAll(req: Request, res: Response){
+    async getAll(req: Request, res: Response){
         this.services.employee.getAll({})
         .then(result => {
             res.send(result);
@@ -11,4 +11,5 @@ export default class EmployeeController extends BaseController{
             res.status(500).send(error?.message);
         })
     }
+
 }
