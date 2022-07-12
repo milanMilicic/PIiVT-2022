@@ -163,6 +163,44 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get all employees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/employee",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"employee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all salaries for specified employee",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/api/employee/1/salary",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"employee",
+								"1",
+								"salary"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
