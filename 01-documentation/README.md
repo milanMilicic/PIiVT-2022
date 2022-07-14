@@ -25,15 +25,62 @@ Aplikacija treba da omogući računovodstvenom osoblju firme da vodi preciznu ev
 
 
 ## Baza podataka
-
+/
 
 
 ## Use-Case dijagrami
+/
+
+## Uloge:
+
+**Korisnik(administrator)**
+
+    Kategorije:
+    - prikazivanje svih kategorija
+    - prikazivanje pojedinačne kategorije
+    - dodavanje novih kategorija(obavezni podaci za name i hourlyPrice - cena satnice kategorije)
+    - ne mogu postojati kategorije sa istim imenom
+    - menjanje imena i/ili satnice kategorije
+
+    Zaposleni:
+    - prikazivanje svih zaposlenih
+    - dodavanje novih zaposlenih kroz kategoriju(obavezni podaci za name i jmbg. Podatak employment nije obavezan i predstavlja radni odnos. Ako korisnik ne definiše podatak employment, po defaultu se definiše da je on 100 pa je tako employment 100 = 100% radni odnos, employemnt 60 = 60% radni odnos itd.)
+    - menjanje imena i/ili statusa i/ili radnog odnosa zaposlenog
+    - ne mogu postojati zaposleni sa istim jmbg-om
+    - ne mogu se menjati podaci zaposlenog ako kategorija kojoj pripada nije odgovarajuća
+    - zaposleni može pripadati samo jendoj kategoriji
+
+    Plata:
+    - prikazivanje svih plata
+    - prikazivanje svih plata za određenu godinu i mesec
+    - dodavanje plate za zaposlenog za određenu godinu i mesec(obavezan podatak workHours - broj odrađenih radnih sati za konkretan mesec. Zaposleni ne može imati manje od 8 ili više od 160 radnih sati u mesecu.)
+    - ne može se dodati plata za zaposlenog koji nije aktivan
+    - ne može se dodati plata za zaposlenog za već postojeći mesec i godinu
+
+    Obračun(Kalkulacija - suma svih troškova za određeni mesec i godinu):
+    - prikazivanje svih obračuna
+    - prikazivanje svih obračuna za konkretnu godinu
+    - prikazivanje svih obračuna za konkretan mesec
+    - prikazivanje obračuna za konkretnu godinu i mesec
+    - dodavanje(računanje) obračuna(obavezni podaci year i monthId gde je monthId 1 = Januar, monthId 2 = Februar itd.)
+    - ne može se dodati obračun za već izračunatu godinu i mesec
+
+    Korisnik:
+    - prikazivanje svih korisnika
+    - prikazivanje konkretnog korisnika
+    - dodavanje novog korisnika(obavezni podaci username i password. Username mora biti dužine između 5 i 32 karaktera i može da sadrži slova, brojeve i simbol "-"(minus). Password mora biti najmanje 6 karaktera i mora sadržati barem jedno veliko slovo i barem jedan broj)
+    - menjanje username i/ili passworda uz sve prethodno napisane kriterijume
+    - ne mogu postojati dva korisnika sa istim username-om
+    - podaci za login korisnika:
+        username: noviusername1
+        password: Novipassword1
+
+        username: admin1
+        password: Password123
+
+    Prilikom login-a, korisnik dobija auth token i refresh token.
+    Korisnik može pomoću svog refresh tokena zatražiti generisanje novog auth tokena.
+    Auth token traje 24h.
+    Refresh token traje 60 dana.   
 
 
-## Uloge
-
-**Korisnik**
-- dodavanje novih zaposlenih
-- menjanje postojećih zaposlenih
-- arhiviranje neangažovanih osoba
