@@ -188,14 +188,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_URL}}/api/employee/1/salary",
+							"raw": "{{API_URL}}/api/employee/2/salary",
 							"host": [
 								"{{API_URL}}"
 							],
 							"path": [
 								"api",
 								"employee",
-								"1",
+								"2",
 								"salary"
 							]
 						}
