@@ -38,13 +38,14 @@ Aplikacija treba da omogući računovodstvenom osoblju firme da vodi preciznu ev
     Kategorije:
     - prikazivanje svih kategorija
     - prikazivanje pojedinačne kategorije
-    - dodavanje novih kategorija(obavezni podaci za name i hourlyPrice - cena satnice kategorije)
+    - dodavanje novih kategorija(obavezni podaci za name(ime mora biti izmedju 3 i 32 karaktera) i hourlyPrice - cena satnice kategorije, minimalna satnica je 300)
     - ne mogu postojati kategorije sa istim imenom
-    - menjanje imena i/ili satnice kategorije
+    - menjanje imena(ime mora biti izmedju 3 i 32 karaktera) i/ili satnice kategorije(minimalna satnica je 300)
 
     Zaposleni:
     - prikazivanje svih zaposlenih
-    - dodavanje novih zaposlenih kroz kategoriju(obavezni podaci za name i jmbg. Podatak employment nije obavezan i predstavlja radni odnos. Ako korisnik ne definiše podatak employment, po defaultu se definiše da je on 100 pa je tako employment 100 = 100% radni odnos, employemnt 60 = 60% radni odnos itd.)
+    - dodavanje novih zaposlenih kroz kategoriju(obavezni podaci za name i jmbg. Podatak employment nije obavezan i predstavlja radni odnos. Ako korisnik ne definiše podatak employment, po defaultu se definiše da je on 100 pa je tako employment 100 = 100% radni odnos, employemnt 60 = 60% radni odnos itd.
+    Svaki zaposleni prilikom dodavanja dobija aktivan status)
     - menjanje imena i/ili statusa i/ili radnog odnosa zaposlenog
     - ne mogu postojati zaposleni sa istim jmbg-om
     - ne mogu se menjati podaci zaposlenog ako kategorija kojoj pripada nije odgovarajuća
@@ -57,7 +58,7 @@ Aplikacija treba da omogući računovodstvenom osoblju firme da vodi preciznu ev
     - ne može se dodati plata za zaposlenog koji nije aktivan
     - ne može se dodati plata za zaposlenog za već postojeći mesec i godinu
 
-    Obračun(Kalkulacija - suma svih troškova za određeni mesec i godinu):
+    Obračun(Kalkulacija - suma svih plata i troškova za određeni mesec i godinu):
     - prikazivanje svih obračuna
     - prikazivanje svih obračuna za konkretnu godinu
     - prikazivanje svih obračuna za konkretan mesec
