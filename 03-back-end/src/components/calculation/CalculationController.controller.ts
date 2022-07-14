@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import BaseController from "../../common/BaseController";
 import SalaryModel from "../salary/SalaryModel.model";
-import IAddCalculationDto, { IAddCalculation } from "./dto/IAddCalculation.dto";
+import IAddCalculationDto, { AddCalculationValidator, IAddCalculation } from "./dto/IAddCalculation.dto";
 
 export default class CalculationController extends BaseController {
 
@@ -72,6 +72,10 @@ export default class CalculationController extends BaseController {
 
     async add(req: Request, res: Response){
         const data = req.body as IAddCalculationDto;
+
+        if(!AddCalculationValidator(data)){
+            return res.status(400).send(AddCalculationValidator.errors);
+        }
 
         this.services.salary.getAllByFieldNamesAndValues("year", "month_id", data.year, data.monthId, {})
         .then(salaries => {
