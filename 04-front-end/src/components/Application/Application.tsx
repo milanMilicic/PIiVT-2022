@@ -1,9 +1,13 @@
 import React from 'react';
-import './Application.css';
+import { Container } from 'react-bootstrap';
+import LoginPage from '../User/LoginPage/LoginPage';
+import './Application.sass';
 
 function Application() {
   return (
-    <p>Pozdrav</p>
+    <Container className='mt-4'>
+      <LoginPage />
+    </Container>
   );
 }
 
