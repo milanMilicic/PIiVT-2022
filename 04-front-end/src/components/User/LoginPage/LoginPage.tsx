@@ -6,12 +6,11 @@ export default function LoginPage(){
     const [password, setPassword] = useState<string>("");
 
     const doLogin = () => {
-        console.log('Attempting to log in' + username + password);
     }
 
     return (
         <div className="row">
-            <div className="col col-xs-12 col-md-6 offset-md-3">
+            <div className="col col-xs-12 col-md-6 offset-md-3 mt-3">
                 <h1 className="h5 mb-3">Log into your account</h1>
                 <div className="form-group mb-3">
                     <div className="input-group">
