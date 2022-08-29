@@ -71,19 +71,22 @@ export default function UserCategoryList(){
         <div>
             { errorMessage && <p>Error: {errorMessage}</p> }
             {!errorMessage && 
-                <table className="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th className="category-row-id">ID</th>
-                            <th className="category-row-name">Name</th>
-                            <th className="category-row-price">Hourly price</th>
-                            <th className="category-row-options">Options</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        { categories.map(category => <UserCategoryListRow key={"category-row-" + category.categoryId} category={ category } /> )}
-                    </tbody>
-                </table>
+                <>
+                    <Link className="btn btn-primary btn-sm mb-2" to={"/user/dashboard/add-new-button"}>Add new category</Link>
+                    <table className="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th className="category-row-id">ID</th>
+                                <th className="category-row-name">Name</th>
+                                <th className="category-row-price">Hourly price</th>
+                                <th className="category-row-options">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            { categories.map(category => <UserCategoryListRow key={"category-row-" + category.categoryId} category={ category } /> )}
+                        </tbody>
+                    </table>
+                </>
             }
         </div>
     );
