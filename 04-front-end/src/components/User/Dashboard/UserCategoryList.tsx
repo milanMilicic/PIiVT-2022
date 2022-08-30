@@ -10,7 +10,7 @@ interface IUserCategoryListRowProperties {
 
 export default function UserCategoryList(){
     const [ categories, setCategories ] = useState<ICategory[]>([]);
-    const [ errorMessage, setErrorMesssage ] = useState<string>("");
+    const [ errorMessage, setErrorMessage ] = useState<string>("");
 
     function UserCategoryListRow(props: IUserCategoryListRowProperties) {
         const [ name, setName ] = useState<string>(props.category.name);
@@ -23,7 +23,7 @@ export default function UserCategoryList(){
             api("put", "/api/category/" + props.category.categoryId, "user", {name: name})
             .then(res => {
                 if (res.status === 'error') {
-                    return setErrorMesssage('Could not edit this category!');
+                    return setErrorMessage('Could not edit this category!');
                 }
 
                 loadCategories();
@@ -59,7 +59,7 @@ export default function UserCategoryList(){
             }
         })
         .catch(error => {
-            setErrorMesssage(error.message ?? 'Unknown error while loading categories');
+            setErrorMessage(error.message ?? 'Unknown error while loading categories');
         });
     }
 
