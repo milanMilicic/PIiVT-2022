@@ -45,7 +45,7 @@ export default function UserAddCategory() {
                             </div>
                         </div>
                         <div className="form-group text-center">
-                            {(name.length >= 3 && name.length <= 32) && price >= 300
+                            {(name.trim().length >= 3 && name.trim().length <= 32) && price >= 300
                             ?  <button className="btn btn-primary px-5" onClick={() => add()}>
                                     Add category
                                 </button>
