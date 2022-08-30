@@ -17,7 +17,7 @@ function Application() {
         <Routes>
 
           <Route path='/auth/user/login' element={ <LoginPage /> } />
-          <Route path='/' element={ <div></div>} />
+          <Route path='/' element={ <div><h1>Welcome</h1></div>} />
           
           <Route path='/user/dashboard' element={<UserDashboard />} />
           <Route path='/user/dashboard/category/list' element={<UserCategoryList />} />
