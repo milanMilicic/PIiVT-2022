@@ -10,6 +10,7 @@ export default class EmployeeRouter implements IRouter {
         const employeeController: EmployeeController = new EmployeeController(resources.services);
 
         application.get('/api/employee', employeeController.getAll.bind(employeeController));
+        application.get('/api/employee/:eid', employeeController.getSingleEmployee.bind(employeeController));
     }
 
 }
