@@ -50,7 +50,7 @@ export default function UserCategoryEmployeesList() {
                 <td>{props.employee.employment}</td>
                 <td>{props.employee.isActive ? 'Active' : 'Not active'}</td>
                 <td>
-                    <Link className="btn btn-primary btn-sm me-3" to={"/user/dashboard/category/employee/" + props.employee.employeeId}>Edit employee</Link>
+                    <Link className="btn btn-primary btn-sm me-3" to={"/user/dashboard/category/" + params.cid + "/employee/" + props.employee.employeeId} state={{employee: props.employee}}>Edit employee</Link>
                     <Link className="btn btn-primary btn-sm" to={"/user/dashboard/employee/" + props.employee.employeeId + "/salary"}>View salaries</Link>
                 </td>
             </tr>
@@ -66,7 +66,7 @@ export default function UserCategoryEmployeesList() {
                         <th>ID</th>
                         <th>Name</th>
                         <th>JMBG</th>
-                        <th>Employment</th>
+                        <th>Employment(%)</th>
                         <th>Status</th>
                         <th>Options</th>
                     </tr>

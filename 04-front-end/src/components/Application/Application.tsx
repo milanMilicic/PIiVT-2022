@@ -6,6 +6,7 @@ import UserAddCategory from '../User/Dashboard/UserAddCategory';
 import UserCategoryEmployeesList from '../User/Dashboard/UserCategoryEmployeesList';
 import UserCategoryList from '../User/Dashboard/UserCategoryList';
 import UserDashboard from '../User/Dashboard/UserDashboard';
+import UserEditEmployee from '../User/Dashboard/UserEditEmployee';
 import LoginPage from '../User/LoginPage/LoginPage';
 import './Application.sass';
 
@@ -23,6 +24,7 @@ function Application() {
           <Route path='/user/dashboard/category/list' element={<UserCategoryList />} />
           <Route path='/user/dashboard/add-new-button' element={<UserAddCategory />} />
           <Route path='/user/dashboard/category/:cid/employees' element={<UserCategoryEmployeesList />} />
+          <Route path='/user/dashboard/category/:cid/employee/:eid' element={<UserEditEmployee />} />
 
         </Routes>
       
