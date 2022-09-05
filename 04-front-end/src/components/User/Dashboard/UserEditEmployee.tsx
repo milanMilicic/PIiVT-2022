@@ -15,6 +15,8 @@ export default function UserEditEmployee(){
     const [ stateLocation, setStateLocation ] = useState<any>(location.state);
     const [ employee, setEmployee ] = useState({name: stateLocation.employee.name, employment: stateLocation.employee.employment});
 
+    console.log(stateLocation.employee.isActive);
+
 
 
 
@@ -40,7 +42,7 @@ export default function UserEditEmployee(){
                 <div className="form-group mb-3">
                     <label htmlFor="name">Name</label>
                     <div className="input-group">
-                        <input id="name" className="form-control" type="text" value={employee.name} onChange={(e) => setEmployee({name: e.target.value, employment: stateLocation.employee.employment})}/>
+                        <input id="name" className="form-control" type="text" value={employee.name} onChange={(e) => setEmployee({name: e.target.value, employment: employee.employment})}/>
                     </div>
                 </div>
                 <div className="form-group mb-3">
@@ -50,13 +52,13 @@ export default function UserEditEmployee(){
                     </div>
                 </div>
                 <div className="form-check">
-                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                    <input className="form-check-input" type="radio" name="status" id="active" />
                     <label className="form-check-label">
                         Active
                     </label>
-                    </div>
-                    <div className="form-check">
-                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
+                </div>
+                <div className="form-check">
+                    <input className="form-check-input" type="radio" name="status" id="inactive" />
                     <label className="form-check-label">
                         Inactive
                     </label>
