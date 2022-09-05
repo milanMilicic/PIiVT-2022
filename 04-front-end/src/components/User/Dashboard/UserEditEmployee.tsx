@@ -15,12 +15,11 @@ export default function UserEditEmployee(){
     const [ stateLocation, setStateLocation ] = useState<any>(location.state);
     const [ employee, setEmployee ] = useState({name: stateLocation.employee.name, employment: stateLocation.employee.employment});
 
-    console.log(stateLocation.employee.isActive);
-
-
+    
 
 
     const doEdit = () => {
+
         api('put', '/api/category/' + params.cid + '/employee/' + params.eid, 'user', {name: employee.name, employment: +(employee.employment)})
         .then(apiResponse => {
             if(apiResponse.status === 'error'){
@@ -52,13 +51,13 @@ export default function UserEditEmployee(){
                     </div>
                 </div>
                 <div className="form-check">
-                    <input className="form-check-input" type="radio" name="status" id="active" />
+                    <input className="form-check-input" type="radio" name="status" id="active" value="active" />
                     <label className="form-check-label">
                         Active
                     </label>
                 </div>
                 <div className="form-check">
-                    <input className="form-check-input" type="radio" name="status" id="inactive" />
+                    <input className="form-check-input" type="radio" name="status" id="inactive" value="inactive" />
                     <label className="form-check-label">
                         Inactive
                     </label>
