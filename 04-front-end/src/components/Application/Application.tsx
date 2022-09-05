@@ -7,6 +7,7 @@ import UserCategoryEmployeesList from '../User/Dashboard/UserCategoryEmployeesLi
 import UserCategoryList from '../User/Dashboard/UserCategoryList';
 import UserDashboard from '../User/Dashboard/UserDashboard';
 import UserEditEmployee from '../User/Dashboard/UserEditEmployee';
+import UserEmployeeList from '../User/Dashboard/UserEmployeeList';
 import UserSalaryEmployee from '../User/Dashboard/UserSalaryEmployee';
 import LoginPage from '../User/LoginPage/LoginPage';
 import './Application.sass';
@@ -27,6 +28,8 @@ function Application() {
           <Route path='/user/dashboard/category/:cid/employees' element={<UserCategoryEmployeesList />} />
           <Route path='/user/dashboard/category/:cid/employee/:eid' element={<UserEditEmployee />} />
           <Route path='/user/dashboard/employee/:eid/salary' element={<UserSalaryEmployee />} />
+
+          <Route path='/user/dashboard/employee/list' element={<UserEmployeeList />} />
 
         </Routes>
       

@@ -15,8 +15,6 @@ export default function UserEditEmployee(){
     const [ stateLocation, setStateLocation ] = useState<any>(location.state);
     const [ employee, setEmployee ] = useState({name: stateLocation.employee.name, employment: stateLocation.employee.employment});
 
-    
-
 
     const doEdit = () => {
 
