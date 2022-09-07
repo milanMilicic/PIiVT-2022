@@ -8,6 +8,7 @@ import UserCategoryList from '../User/Dashboard/UserCategoryList';
 import UserDashboard from '../User/Dashboard/UserDashboard';
 import UserEditEmployee from '../User/Dashboard/UserEditEmployee';
 import UserEmployeeList from '../User/Dashboard/UserEmployeeList';
+import UserEmployeeSalaryList from '../User/Dashboard/UserEmployeeSalaryList';
 import UserSalaryEmployee from '../User/Dashboard/UserSalaryEmployee';
 import LoginPage from '../User/LoginPage/LoginPage';
 import './Application.sass';
@@ -30,6 +31,7 @@ function Application() {
           <Route path='/user/dashboard/employee/:eid/salary' element={<UserSalaryEmployee />} />
 
           <Route path='/user/dashboard/employee/list' element={<UserEmployeeList />} />
+          <Route path='/user/dashboard/salary/list' element={<UserEmployeeSalaryList />} />
 
         </Routes>
       
