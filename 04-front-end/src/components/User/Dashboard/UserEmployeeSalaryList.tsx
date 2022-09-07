@@ -50,7 +50,7 @@ export default function UserEmployeeSalaryList(){
         <div>
             {errorMessage && <p className="alert alert-danger">{errorMessage}</p>}
             {salaryList && (
-                <table className="table table-bordered table-hover">
+                <table className="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
                         <th>Salary no.</th>
