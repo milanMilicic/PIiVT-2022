@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './LoginPage.sass';
 
 export default function LoginPage(){
 
@@ -11,7 +12,7 @@ export default function LoginPage(){
     return (
         <div className="row">
             <div className="col col-xs-12 col-md-6 offset-md-3 mt-3">
-                <h1 className="h5 mb-3">Log into your account</h1>
+                <h1 className="h3 mb-3">Log into your account</h1>
                 <div className="form-group mb-3">
                     <div className="input-group">
                         <input className="form-control" type="text" placeholder="Enter your username" value={username} onChange={e => setUsername(e.target.value)} />
