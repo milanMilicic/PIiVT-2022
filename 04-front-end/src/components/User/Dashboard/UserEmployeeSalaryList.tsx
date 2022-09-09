@@ -69,6 +69,21 @@ export default function UserEmployeeSalaryList(){
                 <tbody>
                     {salaryList.map(salary => <SalaryList key={'salary-row' + salary.salaryId } salary={salary}/>)}
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td>ID</td>
+                        <td>Employee ID</td>
+                        <td>Year</td>
+                        <td>Month</td>
+                        <td>Work hours</td>
+                        <td>Health care</td>
+                        <td>Social care</td>
+                        <td>PIO</td>
+                        <td>Tax</td>
+                        <td>Gross worth</td>
+                        <td>Net worth</td>
+                    </tr>
+                    </tfoot>
             </table>
             )}
         </div>

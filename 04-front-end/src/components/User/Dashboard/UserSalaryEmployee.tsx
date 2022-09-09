@@ -58,23 +58,23 @@ export default function UserSalaryEmployee(){
             {errorMessage && <p className="alert alert-danger">{errorMessage}</p>}
             {salaryData && (
                 <table className="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Year</th>
-                        <th>Month</th>
-                        <th>Work hours</th>
-                        <th>Health care</th>
-                        <th>Social care</th>
-                        <th>PIO</th>
-                        <th>Tax</th>
-                        <th>Gross worth</th>
-                        <th>Net worth</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {salaryData.map(salary => <EmployeeSalaryList key={'employee-salary-row' + salary.employeeId + "-" + salary.salaryId } salary={salary}/>)}
-                </tbody>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Year</th>
+                            <th>Month</th>
+                            <th>Work hours</th>
+                            <th>Health care</th>
+                            <th>Social care</th>
+                            <th>PIO</th>
+                            <th>Tax</th>
+                            <th>Gross worth</th>
+                            <th>Net worth</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {salaryData.map(salary => <EmployeeSalaryList key={'employee-salary-row' + salary.employeeId + "-" + salary.salaryId } salary={salary}/>)}
+                    </tbody>
             </table>
             )}
         </div>
