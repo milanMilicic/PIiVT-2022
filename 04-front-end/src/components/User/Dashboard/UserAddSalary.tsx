@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import IEmployee from "../../../models/IEmployee.model";
 import { api } from '../../../api/api';
 
+
+
 export default function UserAddSalary(){
     let currentMonth = new Date().getMonth() + 1;
     const [ employees, setEmployees ] = useState<IEmployee[]>([]);
@@ -12,6 +14,8 @@ export default function UserAddSalary(){
     const [ workHours, setWorkHours ] = useState<number>(0);
     const [ year, setYear ] = useState<number>(2022);
     const [ month, setMonth ] = useState<number>(currentMonth);
+
+    console.log("ponovo");
 
 
     interface EmployeeListSelectProps {
@@ -34,7 +38,7 @@ export default function UserAddSalary(){
         api("post", `/api/salary/year/${year}/month/${month}/employee/${employee}`, "user", {workHours: workHours})
         .then(apiResponse => {
             if (apiResponse.status === 'error') {
-                return setErrorMessage('Could not add salary!');
+                return setErrorMessage(apiResponse.data);
             }
 
             setMessage("Salary successfully added");
@@ -42,10 +46,6 @@ export default function UserAddSalary(){
                 setMessage("");
             }, 2000);
 
-
-        })
-        .catch(err => {
-            setErrorMessage(err.message ?? 'Unknown error')
         })
     }
 
@@ -63,7 +63,7 @@ export default function UserAddSalary(){
 
             <div className="input-group input-group-md mb-3">
                 <label className="input-group-text">Employee</label>
-                <select className="form-select" onChange={(e) => setEmployee(e.target.value)}>
+                <select value={employee} className="form-select" onChange={(e) => setEmployee(e.target.value)}>
                     <option disabled selected>Choose...</option>
                     {employees.map(employee => <EmployeeListSelect key={'employee-select-row' + employee.employeeId} employee={employee}/>)}
                 </select>
