@@ -51,21 +51,24 @@ export default function UserEmployeeList(){
         <div>
             { errorMessage && <p>Error: {errorMessage}</p> }
             {!errorMessage && (
-                <table className="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>JMBG</th>
-                        <th>Employment(%)</th>
-                        <th>Status</th>
-                        <th>Options</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {employee?.map(employee => <EmployeeListRow key={'employee-row' + employee.employeeId} employee={employee}/>)}
-                </tbody>
-            </table>
+                <>
+                    <Link className="btn btn-primary btn-sm mb-2" to={"/user/dashboard/add-new-employee-button"}>Add new employee</Link>
+                    <table className="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>JMBG</th>
+                                <th>Employment(%)</th>
+                                <th>Status</th>
+                                <th>Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {employee?.map(employee => <EmployeeListRow key={'employee-row' + employee.employeeId} employee={employee}/>)}
+                        </tbody>
+                    </table>
+                </>
             )}
         </div>
     );

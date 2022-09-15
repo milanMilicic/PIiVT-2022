@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import {Routes, Route } from 'react-router-dom';
 import Menu from '../Menu/Menu';
 import UserAddCategory from '../User/Dashboard/UserAddCategory';
+import UserAddEmployee from '../User/Dashboard/UserAddEmployee';
 import UserAddSalary from '../User/Dashboard/UserAddSalary';
 import UserCategoryEmployeesList from '../User/Dashboard/UserCategoryEmployeesList';
 import UserCategoryList from '../User/Dashboard/UserCategoryList';
@@ -27,6 +28,7 @@ function Application() {
           <Route path='/user/dashboard' element={<UserDashboard />} />
           <Route path='/user/dashboard/category/list' element={<UserCategoryList />} />
           <Route path='/user/dashboard/add-new-button' element={<UserAddCategory />} />
+          <Route path='/user/dashboard/add-new-employee-button' element={<UserAddEmployee />} />
           <Route path='/user/dashboard/category/:cid/employees' element={<UserCategoryEmployeesList />} />
           <Route path='/user/dashboard/category/:cid/employee/:eid' element={<UserEditEmployee />} />
           <Route path='/user/dashboard/employee/:eid/salary' element={<UserSalaryEmployee />} />
