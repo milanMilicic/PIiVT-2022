@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import {Routes, Route } from 'react-router-dom';
 import Menu from '../Menu/Menu';
+import UserAdd from '../User/Dashboard/UserAdd';
 import UserAddCategory from '../User/Dashboard/UserAddCategory';
 import UserAddEmployee from '../User/Dashboard/UserAddEmployee';
 import UserAddSalary from '../User/Dashboard/UserAddSalary';
@@ -40,6 +41,7 @@ function Application() {
 
 
           <Route path='/user/dashboard/user/list' element={<UserList />} />
+          <Route path='/user/dashboard/user/add' element={<UserAdd />} />
 
 
 

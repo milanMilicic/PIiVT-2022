@@ -44,7 +44,7 @@ export default function UserList(){
             { errorMessage && <p>Error: {errorMessage}</p> }
             {!errorMessage && (
                 <>
-                    <table className="table table-sm table-bordered table-hover">
+                    <table className="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>ID</th>
