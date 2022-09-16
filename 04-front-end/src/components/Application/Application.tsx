@@ -11,6 +11,7 @@ import UserDashboard from '../User/Dashboard/UserDashboard';
 import UserEditEmployee from '../User/Dashboard/UserEditEmployee';
 import UserEmployeeList from '../User/Dashboard/UserEmployeeList';
 import UserEmployeeSalaryList from '../User/Dashboard/UserEmployeeSalaryList';
+import UserList from '../User/Dashboard/UserList';
 import UserSalaryEmployee from '../User/Dashboard/UserSalaryEmployee';
 import LoginPage from '../User/LoginPage/LoginPage';
 import './Application.sass';
@@ -36,6 +37,9 @@ function Application() {
           <Route path='/user/dashboard/employee/list' element={<UserEmployeeList />} />
           <Route path='/user/dashboard/salary/list' element={<UserEmployeeSalaryList />} />
           <Route path='/user/dashboard/salary/add' element={<UserAddSalary />} />
+
+
+          <Route path='/user/dashboard/user/list' element={<UserList />} />
 
 
 

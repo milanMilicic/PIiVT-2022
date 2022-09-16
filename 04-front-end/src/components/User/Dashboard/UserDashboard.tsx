@@ -75,7 +75,7 @@ export default function UserDashboard() {
                             <div className="btn-group w-100">
                                 <Link className="btn btn-primary" to="/user/dashboard/user/list">List all users</Link>
                                 <Link className="btn btn-success" to="/user/dashboard/user/add">
-                                    {/* <FontAwesomeIcon icon={ faPlusSquare } /> */} Add new user
+                                    Add new user
                                 </Link>
                             </div>
                         </div>
