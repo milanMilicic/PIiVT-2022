@@ -116,17 +116,17 @@ export default function UserAdd(){
             <div className="col col-xs-12 col-md-6 offset-md-3 mt-3">
                 <h1 className="h3 mb-3">Add new user</h1>
                 <div className="form-group mb-1">
+                    <div id="username-info" className="paragraphs">Username must be between 5 and 32 characters and can have lower case letters, <br /> numbers and character '-'</div>
                     <div className="input-group">
                         <input id="username" className="form-control" type="text" placeholder="Enter your username" value={username} onChange={e => setUsername(e.target.value)} />
                     </div>
-                    <div id="username-info" className="paragraphs">Username must be between 5 and 32 characters and can have lower case letters, <br /> numbers and character '-'</div>
                 </div>
                 <div className="form-group mb-1">
+                    <div id="password-info" className="paragraphs">Password must be at least 6 characters, contain at least one upper case letter and a number</div>
                     <div className="input-group">
                         <input id="password1" className="form-control" type="password" placeholder="Enter your password" value={password} onChange={e => setPassword(e.target.value)}/>
                         <div title="Show password" className="btn btn-warning" onClick={() => toggle1()}>Show</div>
                     </div>
-                    <div id="password-info" className="paragraphs">Password must be at least 6 characters, contain at least one upper case letter and a number</div>
                 </div>
                 <div className="form-group mb-3">
                     <div className="input-group">
