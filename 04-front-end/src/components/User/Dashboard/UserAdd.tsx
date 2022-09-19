@@ -73,7 +73,7 @@ export default function UserAdd(){
     });
 
 
-    let passwordInput = document.getElementById('password');
+    let passwordInput = document.getElementById('password1');
     passwordInput?.addEventListener('keyup', function(){
         let div = document.getElementById('password-info');
         if(div){

@@ -9,6 +9,7 @@ import UserAddSalary from '../User/Dashboard/UserAddSalary';
 import UserCategoryEmployeesList from '../User/Dashboard/UserCategoryEmployeesList';
 import UserCategoryList from '../User/Dashboard/UserCategoryList';
 import UserDashboard from '../User/Dashboard/UserDashboard';
+import UserEdit from '../User/Dashboard/UserEdit';
 import UserEditEmployee from '../User/Dashboard/UserEditEmployee';
 import UserEmployeeList from '../User/Dashboard/UserEmployeeList';
 import UserEmployeeSalaryList from '../User/Dashboard/UserEmployeeSalaryList';
@@ -42,6 +43,7 @@ function Application() {
 
           <Route path='/user/dashboard/user/list' element={<UserList />} />
           <Route path='/user/dashboard/user/add' element={<UserAdd />} />
+          <Route path='/api/user/:uid' element={<UserEdit />} />
 
 
 
