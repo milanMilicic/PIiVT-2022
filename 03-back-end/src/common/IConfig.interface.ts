@@ -47,6 +47,7 @@ export default interface IConfig {
     },
     auth: {
         user: IAuthTokenOptions,
+        allowAllRoutesWithoutAuthTokens: boolean,
     }
 
 }

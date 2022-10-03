@@ -50,7 +50,8 @@ const DevConfig: IConfig = {
                 }
             },
         },
-    }
+        allowAllRoutesWithoutAuthTokens: false,
+    },
 }
 
 export default DevConfig;
