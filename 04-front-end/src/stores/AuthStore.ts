@@ -8,13 +8,15 @@ export interface IAuthStoreData {
     refreshToken: string;
 }
 
-let InitialAuthStoreData: IAuthStoreData = {
+const DefaultAuthStoreData: IAuthStoreData = {
     role: "visitor",   // ako ne radi ovako onda zameni za "user"
     identity: "",
     id: 0,
     authToken: "",
     refreshToken: "",
-};
+}
+
+let InitialAuthStoreData: IAuthStoreData = DefaultAuthStoreData;
 
 (() => {
     if(!localStorage.getItem("app-auth-store-data")){
@@ -33,9 +35,9 @@ let InitialAuthStoreData: IAuthStoreData = {
 type TUpdateRole = { type: "update", key: "role", value: "user" | "visitor" };
 type TUpdateId = { type: "update", key: "id", value: number };
 type TUpdateStrings = { type: "update", key: "identity" | "authToken" | "refreshToken", value: string };
+type TReset = { type: "reset" };
 
-
-type TAuthStoreAction = TUpdateRole | TUpdateId | TUpdateStrings;
+type TAuthStoreAction = TUpdateRole | TUpdateId | TUpdateStrings | TReset;
 
 function AuthStoreReducer(oldState: IAuthStoreData = InitialAuthStoreData, action: TAuthStoreAction): IAuthStoreData {
     switch(action.type){
@@ -44,6 +46,11 @@ function AuthStoreReducer(oldState: IAuthStoreData = InitialAuthStoreData, actio
             ...oldState, 
             [action.key]: action.value,
             };
+
+        case "reset":
+            return {
+                ...DefaultAuthStoreData
+            };    
         
         default:
             return {...oldState};
