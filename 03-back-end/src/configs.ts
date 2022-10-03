@@ -35,14 +35,14 @@ const DevConfig: IConfig = {
             issuer: "PIiVT",
             tokens: {
                 auth: {
-                    duration: 60 * 60 * 24, //Za dev: 24h - inace treba par minuta
+                    duration: 60 * 60,
                     keys: {
                         private: readFileSync("./.keystore/app.private", "ascii"),
                         public: readFileSync("./.keystore/app.public", "ascii"),
                     },
                 },
                 refresh: {
-                    duration: 60 * 60 * 24 * 60, //Za dev: 60 dana - inace treba oko mesec dana
+                    duration: 60 * 60 * 24 * 60,
                     keys: {
                         private: readFileSync("./.keystore/app.private", "ascii"),
                         public: readFileSync("./.keystore/app.public", "ascii"),
