@@ -118,19 +118,19 @@ export default function UserAdd(){
                 <div className="form-group mb-1">
                     <div id="username-info" className="paragraphs">Username must be between 5 and 32 characters and can have lower case letters, <br /> numbers and character '-'</div>
                     <div className="input-group">
-                        <input id="username" className="form-control" type="text" placeholder="Enter your username" value={username} onChange={e => setUsername(e.target.value)} />
+                        <input id="username" className="form-control" type="text" placeholder="Enter new username" value={username} onChange={e => setUsername(e.target.value)} />
                     </div>
                 </div>
                 <div className="form-group mb-1">
                     <div id="password-info" className="paragraphs">Password must be at least 6 characters, contain at least one upper case letter and a number</div>
                     <div className="input-group">
-                        <input id="password1" className="form-control" type="password" placeholder="Enter your password" value={password} onChange={e => setPassword(e.target.value)}/>
+                        <input id="password1" className="form-control" type="password" placeholder="Enter new password" value={password} onChange={e => setPassword(e.target.value)}/>
                         <div title="Show password" className="btn btn-warning" onClick={() => toggle1()}>Show</div>
                     </div>
                 </div>
                 <div className="form-group mb-3">
                     <div className="input-group">
-                        <input id="password2" className="form-control" type="password" placeholder="Enter your password again" value={passwordAgain} onChange={e => setPasswordAgain(e.target.value)}/>
+                        <input id="password2" className="form-control" type="password" placeholder="Enter password again" value={passwordAgain} onChange={e => setPasswordAgain(e.target.value)}/>
                         <div title="Show password" className="btn btn-warning" onClick={() => toggle2()}>Show</div>
                     </div>
                 </div>
