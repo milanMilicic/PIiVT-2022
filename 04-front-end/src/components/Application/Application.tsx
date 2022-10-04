@@ -5,6 +5,7 @@ import {Routes, Route } from 'react-router-dom';
 import AuthStore from '../../stores/AuthStore';
 import Menu from '../Menu/Menu';
 import UserAdd from '../User/Dashboard/UserAdd';
+import UserAddCalculation from '../User/Dashboard/UserAddCalculation';
 import UserAddCategory from '../User/Dashboard/UserAddCategory';
 import UserAddEmployee from '../User/Dashboard/UserAddEmployee';
 import UserAddSalary from '../User/Dashboard/UserAddSalary';
@@ -48,6 +49,7 @@ function Application() {
             <Route path='/api/user/:uid' element={<UserEdit />} />
 
             <Route path='/user/dashboard/calculation/list' element={<UserCalculationList />} />
+            <Route path='/user/dashboard/calculation/add' element={<UserAddCalculation />} />
 
 
 
