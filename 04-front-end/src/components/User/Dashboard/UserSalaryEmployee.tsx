@@ -55,7 +55,7 @@ export default function UserSalaryEmployee(){
 
     return (
         <div>
-            {errorMessage && <p className="alert alert-danger">{errorMessage}</p>}
+            {errorMessage && <p className="alert alert-danger my-2">{errorMessage}</p>}
             {salaryData && (
                 <table className="table table-bordered table-hover">
                     <thead>
