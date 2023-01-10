@@ -73,7 +73,7 @@ export default abstract class BaseService<ReturnModel extends IModel, AdapterOpt
         });
     }
 
-                    //kao getAllEmployeesByCategoryId
+                    
     protected async getAllByFieldNameAndValue(fieldName: string, value: any, options: AdapterOptions): Promise<ReturnModel[]>{
         const tableName = this.tableName();
 
@@ -101,7 +101,7 @@ export default abstract class BaseService<ReturnModel extends IModel, AdapterOpt
         });
     }
 
-                    // pretrazujemo po vise kriterijuma
+                    
     public async getAllByFieldNamesAndValues(fieldName1: string, fieldName2: string, value1: any, value2: any, options: AdapterOptions): Promise<ReturnModel[]>{
         const tableName = this.tableName();
 

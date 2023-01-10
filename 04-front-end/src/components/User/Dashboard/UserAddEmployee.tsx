@@ -126,7 +126,7 @@ export default function UserAddEmployee(){
                         </div>
 
                         <div className="form-group mb-3">
-                            <label>Employee:</label>
+                            <label>Category:</label>
                             <select value={category} className="form-select" onChange={(e) => setCategory(+e.target.value)}>
                                 <option disabled selected>Choose...</option>
                                 {categories.map(category => <CategoryListSelect key={'category-select-row' + category.categoryId} category={category}/>)}

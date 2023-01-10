@@ -9,10 +9,6 @@ export default function UserAdd(){
     const [passwordAgain, setPasswordAgain] = useState<string>("");
     const [message, setMessage] = useState<string>("");
 
-
-    
-
-
     const addNewUser = () => {
         var re = new RegExp("^[a-z0-9\-]{5,32}$");
         let paragraf = document.getElementById('message');
