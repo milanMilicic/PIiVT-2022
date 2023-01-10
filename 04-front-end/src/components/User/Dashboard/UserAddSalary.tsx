@@ -14,7 +14,8 @@ export default function UserAddSalary(){
     const [ workHours, setWorkHours ] = useState<number>(0);
     const [ year, setYear ] = useState<number>(2022);
     const [ month, setMonth ] = useState<number>(currentMonth);
-
+    
+    let currentYear = new Date().getFullYear();
 
 
     interface EmployeeListSelectProps {
@@ -71,7 +72,7 @@ export default function UserAddSalary(){
             <div className="input-group input-group-md mb-3">
                 <label className="input-group-text" htmlFor="input-group-1">Year</label>
                 <select className="form-select" id="input-group-1" onChange={(e) => setYear(+e.target.value)}>
-                    <option value="2022" selected>2022</option>
+                    <option value="2022" selected>{currentYear}</option>
                 </select>
             </div>
             <div className="input-group input-group-md mb-3">
